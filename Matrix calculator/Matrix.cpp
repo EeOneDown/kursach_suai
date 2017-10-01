@@ -91,6 +91,10 @@ bool Matrix::ResetSizes(unsigned int N, unsigned int M) {
 	}
 }
 
+void Matrix::SetValue(unsigned int i, unsigned int j, double value) {
+	matrix[i * columns + j] = value;
+};
+
 unsigned int Matrix::GetRows() const {
 	return this->rows;
 };

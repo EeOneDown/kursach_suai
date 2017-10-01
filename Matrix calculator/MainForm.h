@@ -58,10 +58,43 @@ namespace Matrixcalculator {
 
 	private: System::Windows::Forms::Label^  label3;
 	private: System::Windows::Forms::Label^  label4;
-	private: System::Windows::Forms::Button^  button1;
-	private: System::Windows::Forms::Button^  button2;
-	private: System::Windows::Forms::Button^  button3;
-	private: System::Windows::Forms::Button^  button4;
+	private: System::Windows::Forms::Button^  plus;
+	private: System::Windows::Forms::Button^  minus;
+	private: System::Windows::Forms::Button^  multiply;
+	private: System::Windows::Forms::Button^  divide;
+
+
+
+
+
+	private: System::Windows::Forms::Button^  button5;
+	private: System::Windows::Forms::Button^  button6;
+	private: System::Windows::Forms::GroupBox^  groupBox3;
+	private: System::Windows::Forms::TextBox^  ColumnsResultMatrix;
+
+	private: System::Windows::Forms::TextBox^  RowsResultMatrix;
+
+	private: System::Windows::Forms::Label^  label5;
+	private: System::Windows::Forms::DataGridView^  dataGridViewResultMatrix;
+
+	private: System::Windows::Forms::Label^  label6;
+
+	private: System::Windows::Forms::CheckBox^  RandomizeSizesB;
+	private: System::Windows::Forms::CheckBox^  RandomizeSizesA;
+	private: System::Windows::Forms::Button^  TansposeMatrixA;
+	private: System::Windows::Forms::Label^  label7;
+	private: System::Windows::Forms::Label^  label8;
+	private: System::Windows::Forms::Button^  TansposeMatrixB;
+	private: System::Windows::Forms::Button^  CopyAtoB;
+	private: System::Windows::Forms::Label^  label9;
+	private: System::Windows::Forms::Button^  InverteMatrixA;
+
+	private: System::Windows::Forms::Label^  label10;
+	private: System::Windows::Forms::Button^  InverteMatrixB;
+
+
+
+
 
 	protected:
 
@@ -83,21 +116,40 @@ namespace Matrixcalculator {
 		void InitializeComponent(void)
 		{
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->label9 = (gcnew System::Windows::Forms::Label());
+			this->InverteMatrixA = (gcnew System::Windows::Forms::Button());
+			this->label7 = (gcnew System::Windows::Forms::Label());
+			this->TansposeMatrixA = (gcnew System::Windows::Forms::Button());
+			this->RandomizeSizesA = (gcnew System::Windows::Forms::CheckBox());
+			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->RowsMatrixA = (gcnew System::Windows::Forms::NumericUpDown());
 			this->ColumnsMatrixA = (gcnew System::Windows::Forms::NumericUpDown());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->dataGridViewMatrixA = (gcnew System::Windows::Forms::DataGridView());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->label10 = (gcnew System::Windows::Forms::Label());
+			this->CopyAtoB = (gcnew System::Windows::Forms::Button());
+			this->InverteMatrixB = (gcnew System::Windows::Forms::Button());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->RandomizeSizesB = (gcnew System::Windows::Forms::CheckBox());
+			this->TansposeMatrixB = (gcnew System::Windows::Forms::Button());
+			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->RowsMatrixB = (gcnew System::Windows::Forms::NumericUpDown());
 			this->ColumnsMatrixB = (gcnew System::Windows::Forms::NumericUpDown());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->dataGridViewMatrixB = (gcnew System::Windows::Forms::DataGridView());
 			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->button1 = (gcnew System::Windows::Forms::Button());
-			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->plus = (gcnew System::Windows::Forms::Button());
+			this->minus = (gcnew System::Windows::Forms::Button());
+			this->multiply = (gcnew System::Windows::Forms::Button());
+			this->divide = (gcnew System::Windows::Forms::Button());
+			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
+			this->ColumnsResultMatrix = (gcnew System::Windows::Forms::TextBox());
+			this->RowsResultMatrix = (gcnew System::Windows::Forms::TextBox());
+			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->dataGridViewResultMatrix = (gcnew System::Windows::Forms::DataGridView());
+			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->RowsMatrixA))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ColumnsMatrixA))->BeginInit();
@@ -106,41 +158,116 @@ namespace Matrixcalculator {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->RowsMatrixB))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ColumnsMatrixB))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewMatrixB))->BeginInit();
+			this->groupBox3->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewResultMatrix))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// groupBox1
 			// 
+			this->groupBox1->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->groupBox1->Controls->Add(this->label9);
+			this->groupBox1->Controls->Add(this->InverteMatrixA);
+			this->groupBox1->Controls->Add(this->label7);
+			this->groupBox1->Controls->Add(this->TansposeMatrixA);
+			this->groupBox1->Controls->Add(this->RandomizeSizesA);
+			this->groupBox1->Controls->Add(this->button5);
 			this->groupBox1->Controls->Add(this->RowsMatrixA);
 			this->groupBox1->Controls->Add(this->ColumnsMatrixA);
 			this->groupBox1->Controls->Add(this->label2);
 			this->groupBox1->Controls->Add(this->label1);
 			this->groupBox1->Controls->Add(this->dataGridViewMatrixA);
 			this->groupBox1->Location = System::Drawing::Point(12, 12);
+			this->groupBox1->MaximumSize = System::Drawing::Size(862, 460);
+			this->groupBox1->MinimumSize = System::Drawing::Size(460, 320);
 			this->groupBox1->Name = L"groupBox1";
 			this->groupBox1->Size = System::Drawing::Size(460, 320);
 			this->groupBox1->TabIndex = 0;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Matrix A";
 			// 
+			// label9
+			// 
+			this->label9->AutoSize = true;
+			this->label9->Location = System::Drawing::Point(281, 13);
+			this->label9->Name = L"label9";
+			this->label9->Size = System::Drawing::Size(34, 13);
+			this->label9->TabIndex = 10;
+			this->label9->Text = L"Invert";
+			// 
+			// InverteMatrixA
+			// 
+			this->InverteMatrixA->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->InverteMatrixA->Location = System::Drawing::Point(278, 29);
+			this->InverteMatrixA->Name = L"InverteMatrixA";
+			this->InverteMatrixA->Size = System::Drawing::Size(40, 40);
+			this->InverteMatrixA->TabIndex = 9;
+			this->InverteMatrixA->Text = L"-1";
+			this->InverteMatrixA->UseVisualStyleBackColor = true;
+			this->InverteMatrixA->Click += gcnew System::EventHandler(this, &MainForm::InverteMatrixA_Click);
+			// 
+			// label7
+			// 
+			this->label7->AutoSize = true;
+			this->label7->Location = System::Drawing::Point(205, 13);
+			this->label7->Name = L"label7";
+			this->label7->Size = System::Drawing::Size(57, 13);
+			this->label7->TabIndex = 8;
+			this->label7->Text = L"Transpose";
+			// 
+			// TansposeMatrixA
+			// 
+			this->TansposeMatrixA->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->TansposeMatrixA->Location = System::Drawing::Point(212, 29);
+			this->TansposeMatrixA->Name = L"TansposeMatrixA";
+			this->TansposeMatrixA->Size = System::Drawing::Size(40, 40);
+			this->TansposeMatrixA->TabIndex = 7;
+			this->TansposeMatrixA->Text = L"T";
+			this->TansposeMatrixA->UseVisualStyleBackColor = true;
+			this->TansposeMatrixA->Click += gcnew System::EventHandler(this, &MainForm::TansposeMatrixA_Click);
+			// 
+			// RandomizeSizesA
+			// 
+			this->RandomizeSizesA->AutoSize = true;
+			this->RandomizeSizesA->Location = System::Drawing::Point(346, 58);
+			this->RandomizeSizesA->Name = L"RandomizeSizesA";
+			this->RandomizeSizesA->Size = System::Drawing::Size(105, 17);
+			this->RandomizeSizesA->TabIndex = 6;
+			this->RandomizeSizesA->Text = L"Randomize sizes";
+			this->RandomizeSizesA->UseVisualStyleBackColor = true;
+			// 
+			// button5
+			// 
+			this->button5->Location = System::Drawing::Point(358, 32);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(75, 23);
+			this->button5->TabIndex = 5;
+			this->button5->Text = L"Randomize";
+			this->button5->UseVisualStyleBackColor = true;
+			this->button5->Click += gcnew System::EventHandler(this, &MainForm::button5_Click);
+			// 
 			// RowsMatrixA
 			// 
 			this->RowsMatrixA->Location = System::Drawing::Point(26, 32);
-			this->RowsMatrixA->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 30, 0, 0, 0 });
+			this->RowsMatrixA->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 15, 0, 0, 0 });
 			this->RowsMatrixA->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->RowsMatrixA->Name = L"RowsMatrixA";
 			this->RowsMatrixA->Size = System::Drawing::Size(66, 20);
 			this->RowsMatrixA->TabIndex = 4;
+			this->RowsMatrixA->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			this->RowsMatrixA->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->RowsMatrixA->ValueChanged += gcnew System::EventHandler(this, &MainForm::ColumnsMatrixA_ValueChanged);
 			// 
 			// ColumnsMatrixA
 			// 
 			this->ColumnsMatrixA->Location = System::Drawing::Point(119, 32);
-			this->ColumnsMatrixA->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 30, 0, 0, 0 });
+			this->ColumnsMatrixA->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 15, 0, 0, 0 });
 			this->ColumnsMatrixA->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->ColumnsMatrixA->Name = L"ColumnsMatrixA";
 			this->ColumnsMatrixA->Size = System::Drawing::Size(66, 20);
 			this->ColumnsMatrixA->TabIndex = 4;
+			this->ColumnsMatrixA->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			this->ColumnsMatrixA->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->ColumnsMatrixA->ValueChanged += gcnew System::EventHandler(this, &MainForm::ColumnsMatrixA_ValueChanged);
 			// 
@@ -164,45 +291,132 @@ namespace Matrixcalculator {
 			// 
 			// dataGridViewMatrixA
 			// 
+			this->dataGridViewMatrixA->AllowUserToAddRows = false;
+			this->dataGridViewMatrixA->ClipboardCopyMode = System::Windows::Forms::DataGridViewClipboardCopyMode::EnableWithoutHeaderText;
 			this->dataGridViewMatrixA->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridViewMatrixA->Location = System::Drawing::Point(6, 76);
 			this->dataGridViewMatrixA->Name = L"dataGridViewMatrixA";
 			this->dataGridViewMatrixA->Size = System::Drawing::Size(448, 238);
 			this->dataGridViewMatrixA->TabIndex = 1;
+			this->dataGridViewMatrixA->CellValueChanged += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MainForm::dataGridViewMatrixA_CellValueChanged);
 			// 
 			// groupBox2
 			// 
+			this->groupBox2->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->groupBox2->Controls->Add(this->label10);
+			this->groupBox2->Controls->Add(this->CopyAtoB);
+			this->groupBox2->Controls->Add(this->InverteMatrixB);
+			this->groupBox2->Controls->Add(this->label8);
+			this->groupBox2->Controls->Add(this->RandomizeSizesB);
+			this->groupBox2->Controls->Add(this->TansposeMatrixB);
+			this->groupBox2->Controls->Add(this->button6);
 			this->groupBox2->Controls->Add(this->RowsMatrixB);
 			this->groupBox2->Controls->Add(this->ColumnsMatrixB);
 			this->groupBox2->Controls->Add(this->label3);
 			this->groupBox2->Controls->Add(this->dataGridViewMatrixB);
 			this->groupBox2->Controls->Add(this->label4);
 			this->groupBox2->Location = System::Drawing::Point(536, 12);
+			this->groupBox2->MaximumSize = System::Drawing::Size(862, 460);
+			this->groupBox2->MinimumSize = System::Drawing::Size(460, 320);
 			this->groupBox2->Name = L"groupBox2";
 			this->groupBox2->Size = System::Drawing::Size(460, 320);
 			this->groupBox2->TabIndex = 2;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Matrix B";
 			// 
+			// label10
+			// 
+			this->label10->AutoSize = true;
+			this->label10->Location = System::Drawing::Point(281, 13);
+			this->label10->Name = L"label10";
+			this->label10->Size = System::Drawing::Size(34, 13);
+			this->label10->TabIndex = 10;
+			this->label10->Text = L"Invert";
+			// 
+			// CopyAtoB
+			// 
+			this->CopyAtoB->Location = System::Drawing::Point(358, 8);
+			this->CopyAtoB->Name = L"CopyAtoB";
+			this->CopyAtoB->Size = System::Drawing::Size(75, 23);
+			this->CopyAtoB->TabIndex = 9;
+			this->CopyAtoB->Text = L"Copy";
+			this->CopyAtoB->UseVisualStyleBackColor = true;
+			this->CopyAtoB->Click += gcnew System::EventHandler(this, &MainForm::CopyAtoB_Click);
+			// 
+			// InverteMatrixB
+			// 
+			this->InverteMatrixB->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->InverteMatrixB->Location = System::Drawing::Point(278, 29);
+			this->InverteMatrixB->Name = L"InverteMatrixB";
+			this->InverteMatrixB->Size = System::Drawing::Size(40, 40);
+			this->InverteMatrixB->TabIndex = 9;
+			this->InverteMatrixB->Text = L"-1";
+			this->InverteMatrixB->UseVisualStyleBackColor = true;
+			this->InverteMatrixB->Click += gcnew System::EventHandler(this, &MainForm::InverteMatrixB_Click);
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Location = System::Drawing::Point(205, 13);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(57, 13);
+			this->label8->TabIndex = 8;
+			this->label8->Text = L"Transpose";
+			// 
+			// RandomizeSizesB
+			// 
+			this->RandomizeSizesB->AutoSize = true;
+			this->RandomizeSizesB->Location = System::Drawing::Point(346, 58);
+			this->RandomizeSizesB->Name = L"RandomizeSizesB";
+			this->RandomizeSizesB->Size = System::Drawing::Size(105, 17);
+			this->RandomizeSizesB->TabIndex = 6;
+			this->RandomizeSizesB->Text = L"Randomize sizes";
+			this->RandomizeSizesB->UseVisualStyleBackColor = true;
+			// 
+			// TansposeMatrixB
+			// 
+			this->TansposeMatrixB->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(204)));
+			this->TansposeMatrixB->Location = System::Drawing::Point(212, 29);
+			this->TansposeMatrixB->Name = L"TansposeMatrixB";
+			this->TansposeMatrixB->Size = System::Drawing::Size(40, 40);
+			this->TansposeMatrixB->TabIndex = 7;
+			this->TansposeMatrixB->Text = L"T";
+			this->TansposeMatrixB->UseVisualStyleBackColor = true;
+			this->TansposeMatrixB->Click += gcnew System::EventHandler(this, &MainForm::TansposeMatrixB_Click);
+			// 
+			// button6
+			// 
+			this->button6->Location = System::Drawing::Point(358, 32);
+			this->button6->Name = L"button6";
+			this->button6->Size = System::Drawing::Size(75, 23);
+			this->button6->TabIndex = 5;
+			this->button6->Text = L"Randomize";
+			this->button6->UseVisualStyleBackColor = true;
+			this->button6->Click += gcnew System::EventHandler(this, &MainForm::button6_Click);
+			// 
 			// RowsMatrixB
 			// 
 			this->RowsMatrixB->Location = System::Drawing::Point(31, 32);
-			this->RowsMatrixB->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 30, 0, 0, 0 });
+			this->RowsMatrixB->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 15, 0, 0, 0 });
 			this->RowsMatrixB->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->RowsMatrixB->Name = L"RowsMatrixB";
 			this->RowsMatrixB->Size = System::Drawing::Size(66, 20);
 			this->RowsMatrixB->TabIndex = 5;
+			this->RowsMatrixB->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			this->RowsMatrixB->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->RowsMatrixB->ValueChanged += gcnew System::EventHandler(this, &MainForm::ColumnsMatrixB_ValueChanged);
 			// 
 			// ColumnsMatrixB
 			// 
 			this->ColumnsMatrixB->Location = System::Drawing::Point(124, 32);
-			this->ColumnsMatrixB->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 30, 0, 0, 0 });
+			this->ColumnsMatrixB->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 15, 0, 0, 0 });
 			this->ColumnsMatrixB->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->ColumnsMatrixB->Name = L"ColumnsMatrixB";
 			this->ColumnsMatrixB->Size = System::Drawing::Size(66, 20);
 			this->ColumnsMatrixB->TabIndex = 6;
+			this->ColumnsMatrixB->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
 			this->ColumnsMatrixB->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->ColumnsMatrixB->ValueChanged += gcnew System::EventHandler(this, &MainForm::ColumnsMatrixB_ValueChanged);
 			// 
@@ -217,11 +431,13 @@ namespace Matrixcalculator {
 			// 
 			// dataGridViewMatrixB
 			// 
+			this->dataGridViewMatrixB->AllowUserToAddRows = false;
 			this->dataGridViewMatrixB->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridViewMatrixB->Location = System::Drawing::Point(6, 76);
 			this->dataGridViewMatrixB->Name = L"dataGridViewMatrixB";
 			this->dataGridViewMatrixB->Size = System::Drawing::Size(448, 238);
 			this->dataGridViewMatrixB->TabIndex = 2;
+			this->dataGridViewMatrixB->CellValueChanged += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MainForm::dataGridViewMatrixB_CellValueChanged);
 			// 
 			// label4
 			// 
@@ -232,49 +448,124 @@ namespace Matrixcalculator {
 			this->label4->TabIndex = 4;
 			this->label4->Text = L"Rows";
 			// 
-			// button1
+			// plus
 			// 
-			this->button1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->plus->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->plus->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->button1->Location = System::Drawing::Point(479, 111);
-			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(51, 39);
-			this->button1->TabIndex = 3;
-			this->button1->Text = L"+";
-			this->button1->UseVisualStyleBackColor = true;
+			this->plus->Location = System::Drawing::Point(479, 110);
+			this->plus->Name = L"plus";
+			this->plus->Size = System::Drawing::Size(50, 40);
+			this->plus->TabIndex = 3;
+			this->plus->Text = L"+";
+			this->plus->UseVisualStyleBackColor = true;
+			this->plus->Click += gcnew System::EventHandler(this, &MainForm::plus_Click);
 			// 
-			// button2
+			// minus
 			// 
-			this->button2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->minus->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->minus->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->button2->Location = System::Drawing::Point(479, 156);
-			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(51, 39);
-			this->button2->TabIndex = 3;
-			this->button2->Text = L"-";
-			this->button2->UseVisualStyleBackColor = true;
+			this->minus->Location = System::Drawing::Point(479, 155);
+			this->minus->Name = L"minus";
+			this->minus->Size = System::Drawing::Size(50, 40);
+			this->minus->TabIndex = 3;
+			this->minus->Text = L"-";
+			this->minus->UseVisualStyleBackColor = true;
+			this->minus->Click += gcnew System::EventHandler(this, &MainForm::minus_Click);
 			// 
-			// button3
+			// multiply
 			// 
-			this->button3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->multiply->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->multiply->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->button3->Location = System::Drawing::Point(479, 201);
-			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(51, 39);
-			this->button3->TabIndex = 3;
-			this->button3->Text = L"*";
-			this->button3->UseVisualStyleBackColor = true;
+			this->multiply->Location = System::Drawing::Point(479, 200);
+			this->multiply->Name = L"multiply";
+			this->multiply->Size = System::Drawing::Size(50, 40);
+			this->multiply->TabIndex = 3;
+			this->multiply->Text = L"*";
+			this->multiply->UseVisualStyleBackColor = true;
+			this->multiply->Click += gcnew System::EventHandler(this, &MainForm::multiply_Click);
 			// 
-			// button4
+			// divide
 			// 
-			this->button4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+			this->divide->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->divide->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(204)));
-			this->button4->Location = System::Drawing::Point(479, 246);
-			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(51, 39);
-			this->button4->TabIndex = 3;
-			this->button4->Text = L"/";
-			this->button4->UseVisualStyleBackColor = true;
+			this->divide->Location = System::Drawing::Point(479, 245);
+			this->divide->Name = L"divide";
+			this->divide->Size = System::Drawing::Size(50, 40);
+			this->divide->TabIndex = 3;
+			this->divide->Text = L"/";
+			this->divide->UseVisualStyleBackColor = true;
+			this->divide->Click += gcnew System::EventHandler(this, &MainForm::divide_Click);
+			// 
+			// groupBox3
+			// 
+			this->groupBox3->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->groupBox3->Controls->Add(this->ColumnsResultMatrix);
+			this->groupBox3->Controls->Add(this->RowsResultMatrix);
+			this->groupBox3->Controls->Add(this->label5);
+			this->groupBox3->Controls->Add(this->dataGridViewResultMatrix);
+			this->groupBox3->Controls->Add(this->label6);
+			this->groupBox3->Location = System::Drawing::Point(274, 349);
+			this->groupBox3->MaximumSize = System::Drawing::Size(862, 460);
+			this->groupBox3->MinimumSize = System::Drawing::Size(460, 320);
+			this->groupBox3->Name = L"groupBox3";
+			this->groupBox3->Size = System::Drawing::Size(460, 320);
+			this->groupBox3->TabIndex = 2;
+			this->groupBox3->TabStop = false;
+			this->groupBox3->Text = L"Result Matrix";
+			// 
+			// ColumnsResultMatrix
+			// 
+			this->ColumnsResultMatrix->Location = System::Drawing::Point(116, 32);
+			this->ColumnsResultMatrix->Name = L"ColumnsResultMatrix";
+			this->ColumnsResultMatrix->ReadOnly = true;
+			this->ColumnsResultMatrix->Size = System::Drawing::Size(66, 20);
+			this->ColumnsResultMatrix->TabIndex = 6;
+			this->ColumnsResultMatrix->Text = L"0";
+			this->ColumnsResultMatrix->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			// 
+			// RowsResultMatrix
+			// 
+			this->RowsResultMatrix->Location = System::Drawing::Point(25, 32);
+			this->RowsResultMatrix->Name = L"RowsResultMatrix";
+			this->RowsResultMatrix->ReadOnly = true;
+			this->RowsResultMatrix->Size = System::Drawing::Size(66, 20);
+			this->RowsResultMatrix->TabIndex = 6;
+			this->RowsResultMatrix->Text = L"0";
+			this->RowsResultMatrix->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(126, 16);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(47, 13);
+			this->label5->TabIndex = 5;
+			this->label5->Text = L"Columns";
+			// 
+			// dataGridViewResultMatrix
+			// 
+			this->dataGridViewResultMatrix->AllowUserToAddRows = false;
+			this->dataGridViewResultMatrix->AllowUserToDeleteRows = false;
+			this->dataGridViewResultMatrix->AllowUserToResizeColumns = false;
+			this->dataGridViewResultMatrix->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridViewResultMatrix->Location = System::Drawing::Point(6, 76);
+			this->dataGridViewResultMatrix->Name = L"dataGridViewResultMatrix";
+			this->dataGridViewResultMatrix->ReadOnly = true;
+			this->dataGridViewResultMatrix->Size = System::Drawing::Size(448, 238);
+			this->dataGridViewResultMatrix->TabIndex = 2;
+			// 
+			// label6
+			// 
+			this->label6->AutoSize = true;
+			this->label6->Location = System::Drawing::Point(41, 16);
+			this->label6->Name = L"label6";
+			this->label6->Size = System::Drawing::Size(34, 13);
+			this->label6->TabIndex = 4;
+			this->label6->Text = L"Rows";
 			// 
 			// MainForm
 			// 
@@ -282,14 +573,19 @@ namespace Matrixcalculator {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->AutoScroll = true;
 			this->ClientSize = System::Drawing::Size(1008, 681);
-			this->Controls->Add(this->button4);
-			this->Controls->Add(this->button3);
-			this->Controls->Add(this->button2);
-			this->Controls->Add(this->button1);
+			this->Controls->Add(this->divide);
+			this->Controls->Add(this->multiply);
+			this->Controls->Add(this->minus);
+			this->Controls->Add(this->plus);
+			this->Controls->Add(this->groupBox3);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->groupBox1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Fixed3D;
+			this->MaximizeBox = false;
 			this->Name = L"MainForm";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Matrix Calculator";
+			this->Load += gcnew System::EventHandler(this, &MainForm::MainForm_Load);
 			this->groupBox1->ResumeLayout(false);
 			this->groupBox1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->RowsMatrixA))->EndInit();
@@ -300,28 +596,95 @@ namespace Matrixcalculator {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->RowsMatrixB))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->ColumnsMatrixB))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewMatrixB))->EndInit();
+			this->groupBox3->ResumeLayout(false);
+			this->groupBox3->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridViewResultMatrix))->EndInit();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
-	private: void printMatrix(Matrix & mt, System::Windows::Forms::DataGridView ^ dataGridView) {
+	// функция проверки равенства размеров матриц
+	private: bool isSameSizes(Matrix & mt1, Matrix & mt2) {
+		return (mt1.GetRows() == mt2.GetRows() && mt1.GetColumns() == mt2.GetColumns());
+	}
+	
+	// функция проверки согласованости матриц
+	private: bool isReadyToMultiply(Matrix & mt1, Matrix & mt2) {
+		return (mt1.GetColumns() == mt2.GetRows());
+	}
+	
+	// функция заполнения матрицы рандомными значениями
+	private: void randomizeMatrixValues(Matrix & mt, double min, double max) {
+		for (unsigned int i = 0; i < mt.GetRows(); i++)
+			for (unsigned int j = 0; j < mt.GetColumns(); j++)
+				mt.SetValue(i, j, randomDouble(min, max));
+		
+	}
+	
+	// функция генерации рандомного числа типа double
+	private: double randomDouble(double min, double max) {
+		return round(((double)rand() / (double)RAND_MAX * (max - min) + min) * 10000) / 10000.;
+	}
+
+	// функция изменения значения матрицы при ручном вводе
+	private: void editMatrixValue(Matrix & mt, System::Windows::Forms::DataGridView^ dataGridView) {
+		double newValue;
+
+		if (!dataGridView->CurrentCell || !dataGridView->CurrentCell->Value)
+			return;
+
+		if (!Double::TryParse(Convert::ToString(dataGridView->CurrentCell->Value), newValue)) {
+			MessageBox::Show("Матрица может содержать только числа.", "Ошибка!");
+			dataGridView->CurrentCell->Value = "0";
+		}
+
+		int i = dataGridView->CurrentCell->RowIndex;
+		int j = dataGridView->CurrentCell->ColumnIndex;
+
+		mt.SetValue(i, j, newValue);
+		// printMatrix(mt, dataGridViewResultMatrix);
+	}
+
+	// функция транспонирования матрицы
+	private: void transposeMatrix(Matrix & mt, System::Windows::Forms::NumericUpDown^ RowsMatrix,
+									System::Windows::Forms::NumericUpDown^ ColumnsMatrix,
+									System::Windows::Forms::DataGridView^ dataGridView) {
+		Matrix newMatrix = mt.Transpose();
+		int oldRows = mt.GetRows();
+		int oldColumns = mt.GetColumns();
+		RowsMatrix->Value = oldColumns;
+		ColumnsMatrix->Value = oldRows;
+		mt = newMatrix;
+		printMatrix(mt, dataGridView);
+	}
+
+	// функция вывода матрицы в поле dataGridView
+	private: void printMatrix(Matrix & mt, System::Windows::Forms::DataGridView^ dataGridView) {
 		int Rows = mt.GetRows();
 		int Columns = mt.GetColumns();
 
 		dataGridView->RowCount = Rows;
 		dataGridView->ColumnCount = Columns;
+		dataGridView->TopLeftHeaderCell->Value = "Matrix";
 
 		for (int i = 0; i < Rows; i++) 
 			for (int j = 0; j < Columns; j++) {
-				dataGridView->TopLeftHeaderCell->Value = "Matrix";
+				dataGridView->Rows[i]->Cells[j]->Value = mt(i, j);
 				dataGridView->Columns[j]->HeaderCell->Value = Convert::ToString(j + 1);
 				dataGridView->Rows[i]->HeaderCell->Value = Convert::ToString(i + 1);
-				dataGridView->Rows[i]->Cells[j]->Value = mt(i, j);
 			}
 		dataGridView->AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode::AutoSizeToAllHeaders);
 		dataGridView->AutoResizeColumns();
 
 	}
+
+	// вывод матриц при загрузке главного окна
+	private: System::Void MainForm_Load(System::Object^  sender, System::EventArgs^  e) {
+		printMatrix(MatrixA, dataGridViewMatrixA);
+		printMatrix(MatrixB, dataGridViewMatrixB);
+	}
+
+	// изменение матрицы A при изменении количества столбцов/полей
 	private: System::Void ColumnsMatrixA_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
 		int rows = Convert::ToInt32(RowsMatrixA->Value);
 		int columns = Convert::ToInt32(ColumnsMatrixA->Value);
@@ -329,12 +692,121 @@ namespace Matrixcalculator {
 		
 		printMatrix(MatrixA, dataGridViewMatrixA);
 	}
+
+	// изменение матрицы B при изменении количества столбцов/полей
 	private: System::Void ColumnsMatrixB_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
 		int rows = Convert::ToInt32(RowsMatrixB->Value);
 		int columns = Convert::ToInt32(ColumnsMatrixB->Value);
 		MatrixB = Matrix(rows, columns);
 
 		printMatrix(MatrixB, dataGridViewMatrixB);
+	}
+
+	// генерация и отрисовка рандомной матрицы A
+	private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
+		if (RandomizeSizesA->Checked) {
+			int rows = rand() % 15 + 1;
+			int columns = rand() % 15 + 1;
+
+			RowsMatrixA->Value = rows;
+			ColumnsMatrixA->Value = columns;
+		}
+
+		randomizeMatrixValues(MatrixA, -100, 100);
+		printMatrix(MatrixA, dataGridViewMatrixA);
+	}
+
+	// генерация и отрисовка рандомной матрицы B
+	private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
+		if (RandomizeSizesB->Checked) {
+			int rows = rand() % 15 + 1;
+			int columns = rand() % 15 + 1;
+
+			RowsMatrixB->Value = rows;
+			ColumnsMatrixB->Value = columns;
+		}
+
+		randomizeMatrixValues(MatrixB, -100, 100);
+		printMatrix(MatrixB, dataGridViewMatrixB);
+	}
+
+	// изменение значения матрицы A при ручном вводе
+	private: System::Void dataGridViewMatrixA_CellValueChanged(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
+		editMatrixValue(MatrixA, dataGridViewMatrixA);
+	}
+
+	// изменение значения матрицы A при ручном вводе
+	private: System::Void dataGridViewMatrixB_CellValueChanged(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
+		editMatrixValue(MatrixB, dataGridViewMatrixB);
+	}
+
+	// транспонирование и отрисовка матрицы A
+	private: System::Void TansposeMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
+		transposeMatrix(MatrixA, RowsMatrixA, ColumnsMatrixA, dataGridViewMatrixA);
+	}
+
+	// транспонирование и отрисовка матрицы B
+	private: System::Void TansposeMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
+		transposeMatrix(MatrixB, RowsMatrixB, ColumnsMatrixB, dataGridViewMatrixB);
+	}
+
+	// взятие обратной матрицы для матрицы A
+	private: System::Void InverteMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
+		MessageBox::Show("Данная функция еще в разработке.", "Предупреждение");
+	}
+
+	// взятие обратной матрицы для матрицы B
+	private: System::Void InverteMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
+		MessageBox::Show("Данная функция еще в разработке.", "Предупреждение");
+	}
+
+	// копирование матрицы A в матрицу B 
+	private: System::Void CopyAtoB_Click(System::Object^  sender, System::EventArgs^  e) {
+		RowsMatrixB->Value = RowsMatrixA->Value;
+		ColumnsMatrixB->Value = ColumnsMatrixA->Value;
+		MatrixB = MatrixA;
+		printMatrix(MatrixB, dataGridViewMatrixB);
+	}
+
+	// сложение матриц с проверкой 
+	private: System::Void plus_Click(System::Object^  sender, System::EventArgs^  e) {
+		if (!isSameSizes(MatrixA, MatrixB)) {
+			MessageBox::Show("Размеры матриц должны совпадать.", "Ошибка!");
+			return;
+		}
+		Matrix resultMatrix = MatrixA + MatrixB;
+		RowsResultMatrix->Text = Convert::ToString(resultMatrix.GetRows());
+		ColumnsResultMatrix->Text = Convert::ToString(resultMatrix.GetColumns());
+		printMatrix(resultMatrix, dataGridViewResultMatrix);
+	}
+
+	// вычитание матриц с проверкой
+	private: System::Void minus_Click(System::Object^  sender, System::EventArgs^  e) {
+		if (!isSameSizes(MatrixA, MatrixB)) {
+			MessageBox::Show("Размеры матриц должны совпадать.", "Ошибка!");
+			return;
+		}
+		Matrix resultMatrix = MatrixA - MatrixB;
+		RowsResultMatrix->Text = Convert::ToString(resultMatrix.GetRows());
+		ColumnsResultMatrix->Text = Convert::ToString(resultMatrix.GetColumns());
+		printMatrix(resultMatrix, dataGridViewResultMatrix);
+	}
+
+	// умножение матриц с проверкой
+	private: System::Void multiply_Click(System::Object^  sender, System::EventArgs^  e) {
+		if (!isReadyToMultiply(MatrixA, MatrixB)) {
+			MessageBox::Show("Матрицы должны быть согласованы.", "Ошибка!");
+			return;
+		}
+		Matrix resultMatrix = MatrixA * MatrixB;
+		RowsResultMatrix->Text = Convert::ToString(resultMatrix.GetRows());
+		ColumnsResultMatrix->Text = Convert::ToString(resultMatrix.GetColumns());
+		printMatrix(resultMatrix, dataGridViewResultMatrix);
+	}
+
+	// деление с проверкой
+	private: System::Void divide_Click(System::Object^  sender, System::EventArgs^  e) {
+		MessageBox::Show("Данная функция еще в разработке.", "Предупреждение");
 	}
 };
 }

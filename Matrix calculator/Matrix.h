@@ -15,8 +15,9 @@ public:
 
 	void SetSizes(unsigned int, unsigned int);              // метод установки размера
 	bool ResetSizes(unsigned int, unsigned int);            // метод изменения размера
+	void SetValue(unsigned int, unsigned int, double);		// метод изменения элемента
 	unsigned int GetRows() const;							// метод получения колличество строк
-	unsigned int GetColumns() const;							// метод получения колличество столбцов
+	unsigned int GetColumns() const;						// метод получения колличество столбцов
 	Matrix &  Transpose() const;                            // метод транспонирования
 
 	Matrix & operator-();                                   // унарный оператор "-"
