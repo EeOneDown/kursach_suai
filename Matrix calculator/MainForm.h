@@ -603,17 +603,17 @@ namespace Matrixcalculator {
 
 		}
 #pragma endregion
-	// функция проверки равенства размеров матриц
+	// function to check dimensions equality of matrixes 
 	private: bool isSameSizes(Matrix & mt1, Matrix & mt2) {
 		return (mt1.GetRows() == mt2.GetRows() && mt1.GetColumns() == mt2.GetColumns());
 	}
 	
-	// функция проверки согласованости матриц
+	// function to check consistency of matrixes
 	private: bool isReadyToMultiply(Matrix & mt1, Matrix & mt2) {
 		return (mt1.GetColumns() == mt2.GetRows());
 	}
 	
-	// функция заполнения матрицы рандомными значениями
+	// function to initialize matrix of random values
 	private: void randomizeMatrixValues(Matrix & mt, double min, double max) {
 		for (unsigned int i = 0; i < mt.GetRows(); i++)
 			for (unsigned int j = 0; j < mt.GetColumns(); j++)
@@ -621,12 +621,12 @@ namespace Matrixcalculator {
 		
 	}
 	
-	// функция генерации рандомного числа типа double
+	// function to generate random double number
 	private: double randomDouble(double min, double max) {
 		return round(((double)rand() / (double)RAND_MAX * (max - min) + min) * 10000) / 10000.;
 	}
 
-	// функция изменения значения матрицы при ручном вводе
+	// function to change value of matrix at user input
 	private: void editMatrixValue(Matrix & mt, System::Windows::Forms::DataGridView^ dataGridView) {
 		double newValue;
 
@@ -642,10 +642,9 @@ namespace Matrixcalculator {
 		int j = dataGridView->CurrentCell->ColumnIndex;
 
 		mt.SetValue(i, j, newValue);
-		// printMatrix(mt, dataGridViewResultMatrix);
 	}
 
-	// функция транспонирования матрицы
+	// function to transpose matrix
 	private: void transposeMatrix(Matrix & mt, System::Windows::Forms::NumericUpDown^ RowsMatrix,
 									System::Windows::Forms::NumericUpDown^ ColumnsMatrix,
 									System::Windows::Forms::DataGridView^ dataGridView) {
@@ -658,7 +657,7 @@ namespace Matrixcalculator {
 		printMatrix(mt, dataGridView);
 	}
 
-	// функция вывода матрицы в поле dataGridView
+	// function to output matrix to dataGridView
 	private: void printMatrix(Matrix & mt, System::Windows::Forms::DataGridView^ dataGridView) {
 		int Rows = mt.GetRows();
 		int Columns = mt.GetColumns();
@@ -678,13 +677,13 @@ namespace Matrixcalculator {
 
 	}
 
-	// вывод матриц при загрузке главного окна
+	// print matrixes when MainForm loads
 	private: System::Void MainForm_Load(System::Object^  sender, System::EventArgs^  e) {
 		printMatrix(MatrixA, dataGridViewMatrixA);
 		printMatrix(MatrixB, dataGridViewMatrixB);
 	}
 
-	// изменение матрицы A при изменении количества столбцов/полей
+	// change MatrixA when user changes sizes
 	private: System::Void ColumnsMatrixA_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
 		int rows = Convert::ToInt32(RowsMatrixA->Value);
 		int columns = Convert::ToInt32(ColumnsMatrixA->Value);
@@ -693,7 +692,7 @@ namespace Matrixcalculator {
 		printMatrix(MatrixA, dataGridViewMatrixA);
 	}
 
-	// изменение матрицы B при изменении количества столбцов/полей
+	// change MatrixB when user changes sizes
 	private: System::Void ColumnsMatrixB_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
 		int rows = Convert::ToInt32(RowsMatrixB->Value);
 		int columns = Convert::ToInt32(ColumnsMatrixB->Value);
@@ -702,7 +701,7 @@ namespace Matrixcalculator {
 		printMatrix(MatrixB, dataGridViewMatrixB);
 	}
 
-	// генерация и отрисовка рандомной матрицы A
+	// generate and print random MatrixA
 	private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
 		if (RandomizeSizesA->Checked) {
 			int rows = rand() % 15 + 1;
@@ -712,11 +711,11 @@ namespace Matrixcalculator {
 			ColumnsMatrixA->Value = columns;
 		}
 
-		randomizeMatrixValues(MatrixA, -100, 100);
+		randomizeMatrixValues(MatrixA, -1000, 1000);
 		printMatrix(MatrixA, dataGridViewMatrixA);
 	}
 
-	// генерация и отрисовка рандомной матрицы B
+	// generate and print random MatrixB
 	private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
 		if (RandomizeSizesB->Checked) {
 			int rows = rand() % 15 + 1;
@@ -730,37 +729,37 @@ namespace Matrixcalculator {
 		printMatrix(MatrixB, dataGridViewMatrixB);
 	}
 
-	// изменение значения матрицы A при ручном вводе
+	// change value of MatrixA at user input
 	private: System::Void dataGridViewMatrixA_CellValueChanged(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
 		editMatrixValue(MatrixA, dataGridViewMatrixA);
 	}
 
-	// изменение значения матрицы A при ручном вводе
+	// change value of MatrixB at user input
 	private: System::Void dataGridViewMatrixB_CellValueChanged(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
 		editMatrixValue(MatrixB, dataGridViewMatrixB);
 	}
 
-	// транспонирование и отрисовка матрицы A
+	// transpose and print MatrixA
 	private: System::Void TansposeMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
 		transposeMatrix(MatrixA, RowsMatrixA, ColumnsMatrixA, dataGridViewMatrixA);
 	}
 
-	// транспонирование и отрисовка матрицы B
+	// transpose and print MatrixB
 	private: System::Void TansposeMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
 		transposeMatrix(MatrixB, RowsMatrixB, ColumnsMatrixB, dataGridViewMatrixB);
 	}
 
-	// взятие обратной матрицы для матрицы A
+	// invert and print MatrixA
 	private: System::Void InverteMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
 		MessageBox::Show("Данная функция еще в разработке.", "Предупреждение");
 	}
 
-	// взятие обратной матрицы для матрицы B
+	// invert and print MatrixB
 	private: System::Void InverteMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
 		MessageBox::Show("Данная функция еще в разработке.", "Предупреждение");
 	}
 
-	// копирование матрицы A в матрицу B 
+	// cope MatrixA to MatrixB and print MatrixB
 	private: System::Void CopyAtoB_Click(System::Object^  sender, System::EventArgs^  e) {
 		RowsMatrixB->Value = RowsMatrixA->Value;
 		ColumnsMatrixB->Value = ColumnsMatrixA->Value;
@@ -768,7 +767,7 @@ namespace Matrixcalculator {
 		printMatrix(MatrixB, dataGridViewMatrixB);
 	}
 
-	// сложение матриц с проверкой 
+	// addition of matrixes with checking
 	private: System::Void plus_Click(System::Object^  sender, System::EventArgs^  e) {
 		if (!isSameSizes(MatrixA, MatrixB)) {
 			MessageBox::Show("Размеры матриц должны совпадать.", "Ошибка!");
@@ -780,7 +779,7 @@ namespace Matrixcalculator {
 		printMatrix(resultMatrix, dataGridViewResultMatrix);
 	}
 
-	// вычитание матриц с проверкой
+	// subtraction of matrixes with checking
 	private: System::Void minus_Click(System::Object^  sender, System::EventArgs^  e) {
 		if (!isSameSizes(MatrixA, MatrixB)) {
 			MessageBox::Show("Размеры матриц должны совпадать.", "Ошибка!");
@@ -792,7 +791,7 @@ namespace Matrixcalculator {
 		printMatrix(resultMatrix, dataGridViewResultMatrix);
 	}
 
-	// умножение матриц с проверкой
+	// multiplication of matrixes with checking
 	private: System::Void multiply_Click(System::Object^  sender, System::EventArgs^  e) {
 		if (!isReadyToMultiply(MatrixA, MatrixB)) {
 			MessageBox::Show("Матрицы должны быть согласованы.", "Ошибка!");
@@ -804,7 +803,7 @@ namespace Matrixcalculator {
 		printMatrix(resultMatrix, dataGridViewResultMatrix);
 	}
 
-	// деление с проверкой
+	// division of matrixes with checking
 	private: System::Void divide_Click(System::Object^  sender, System::EventArgs^  e) {
 		MessageBox::Show("Данная функция еще в разработке.", "Предупреждение");
 	}

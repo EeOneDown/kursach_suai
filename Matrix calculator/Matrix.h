@@ -7,27 +7,27 @@ private:
 	unsigned int rows, columns;
 	double * matrix;
 public:
-	Matrix();                                               // конструктор без параметров
-	Matrix(unsigned int, unsigned int);                     // конструктор с указанием размера
-	Matrix(const double *, unsigned int, unsigned int);     // конструктор от массива с указанием размера
-	Matrix(const Matrix &);                                 // конструктор копирования
-	~Matrix();                                              // деструктор
+	Matrix();                                               // constructor without parameters
+	Matrix(unsigned int, unsigned int);                     // constructor from sizes
+	Matrix(const double *, unsigned int, unsigned int);     // constructor from array with sizes
+	Matrix(const Matrix &);                                 // copy constructor
+	~Matrix();                                              // destructor
 
-	void SetSizes(unsigned int, unsigned int);              // метод установки размера
-	bool ResetSizes(unsigned int, unsigned int);            // метод изменения размера
-	void SetValue(unsigned int, unsigned int, double);		// метод изменения элемента
-	unsigned int GetRows() const;							// метод получения колличество строк
-	unsigned int GetColumns() const;						// метод получения колличество столбцов
-	Matrix &  Transpose() const;                            // метод транспонирования
+	void SetSizes(unsigned int, unsigned int);              // method to set sizes
+	bool ResetSizes(unsigned int, unsigned int);            // method to reset sizes
+	void SetValue(unsigned int, unsigned int, double);		// method to change value
+	unsigned int GetRows() const;							// method to get count of rows
+	unsigned int GetColumns() const;						// method to get count of columns
+	Matrix &  Transpose() const;                            // method to transpose
 
-	Matrix & operator-();                                   // унарный оператор "-"
-	Matrix & operator+(const Matrix &) const;               // бинарный оператор "+"
-	Matrix & operator-(const Matrix &) const;               // бинарный оператор "-"
-	Matrix & operator*(const Matrix &) const;               // бинарный оператор "*"
-	Matrix & operator=(const Matrix &);						// бинарный оператор "="
+	Matrix & operator-();                                   // unary operator "-"
+	Matrix & operator+(const Matrix &) const;               // binary operator "+"
+	Matrix & operator-(const Matrix &) const;               // binary operator "-"
+	Matrix & operator*(const Matrix &) const;               // binary operator "*"
+	Matrix & operator=(const Matrix &);						// binary operator "="
 	
-	double & operator()(unsigned int, unsigned int);        // оператор доступа к элементу
+	double & operator()(unsigned int, unsigned int);        // access to matrix element
 
-	friend bool operator==(const Matrix &, const Matrix &);             // оператор сравнения
-	friend std::ostream & operator<<(std::ostream &, const Matrix &);   // оператор вывода в поток
+	friend bool operator==(const Matrix &, const Matrix &);             // comparison operator
+	friend std::ostream & operator<<(std::ostream &, const Matrix &);   // output operator
 };
