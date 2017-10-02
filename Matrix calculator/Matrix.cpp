@@ -103,6 +103,88 @@ unsigned int Matrix::GetColumns() const {
 	return this->columns;
 };
 
+double Matrix::GetDeterminant() const {
+	if (!rows || !columns) {
+		std::cout << "ERROR in GetDeterminant: matrix is empty" << std::endl;
+		return 0;
+	}
+	else if (rows != columns) {
+		std::cout << "ERROR in GetDeterminant: matrix must be square" << std::endl;
+		return 0;
+	}
+	else if (rows == 1 && columns == 1)
+		return matrix[0];
+	else if (rows == 2 && columns == 2)
+		return matrix[0] * matrix[3] - matrix[2] * matrix[1];
+	else {
+		int pusOrMinusOne = 1;
+		double determinant = 0;
+		for (int i = 0; i < columns; i++) {
+			determinant += pusOrMinusOne * matrix[i] * this->GetMinor(0, i).GetDeterminant();
+			pusOrMinusOne *= -1;
+		}
+		return determinant;
+	}
+}
+
+Matrix & Matrix::GetMinor(unsigned int _i, unsigned int _j) const {
+	if (!rows || !columns) {
+		std::cout << "ERROR in GetMinor: matrix is empty" << std::endl;
+		return *new Matrix(*this);
+	}
+	else if (rows != columns) {
+		std::cout << "ERROR in GetMinor: matrix must be square" << std::endl;
+		return *new Matrix(*this);
+	}
+	else if (rows == 1 && columns == 1)
+		return *new Matrix(*this);
+	else {
+		unsigned int newRows = rows - 1;
+		unsigned int newColumns = columns - 1;
+		auto newMatrix = new Matrix(newRows, newColumns);
+		unsigned int newMatrixIterator = 0;
+		for (int i = 0; i < rows; i++) {
+			if (i == _i)
+				continue;
+			for (int j = 0; j < columns; j++) {
+				if (j == _j)
+					continue;
+				newMatrix->matrix[newMatrixIterator] = this->matrix[i * this->columns + j];
+				newMatrixIterator += 1;
+			}
+		}
+		return *newMatrix;
+	}
+}
+
+Matrix & Matrix::GetAdjugateMatrix() const {
+	if (!rows || !columns) {
+		std::cout << "ERROR in GetCofactorMatrix: matrix is empty" << std::endl;
+		return *new Matrix(*this);
+	}
+	else if (rows != columns) {
+		std::cout << "ERROR in GetCofactorMatrix: matrix must be square" << std::endl;
+		return *new Matrix(*this);
+	}
+	else if (rows == 1 && columns == 1) {
+		auto newMatrix = new Matrix(1, 1);
+		(*newMatrix)(0, 0) = 1;
+		return *newMatrix;
+	}
+	else {
+		auto newMatrix = new Matrix(this->rows, this->columns);
+		int pusOrMinusOne = 1;
+		
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < columns; j++) {
+				newMatrix->matrix[i * newMatrix->columns + j] = pusOrMinusOne * this->GetMinor(i, j).GetDeterminant();
+				pusOrMinusOne *= -1;
+			}
+		}
+		return newMatrix->Transpose();
+	}
+}
+
 Matrix & Matrix::Transpose() const {
 	auto * newMt = new Matrix(this->columns, this->rows);
 	for (int i = 0; i < this->rows; i++)
@@ -174,6 +256,24 @@ Matrix & Matrix::operator=(const Matrix & mt) {
 		matrix = nullptr;
 	}
 };
+
+Matrix & Matrix::operator*(const double number) const {
+	auto newMatrix = new Matrix(*this);
+	for (int i = 0; i < rows * columns; i++)
+		newMatrix->matrix[i] *= number;
+	return *newMatrix;
+}
+
+Matrix & Matrix::operator/(const double number) const {
+	auto * newMatrix = new Matrix(*this);
+	if (!number)
+		std::cout << "ERROR in operator/: Can't divide by zero" << std::endl;
+	else {
+		for (int i = 0; i < rows * columns; i++)
+			newMatrix->matrix[i] /= number;
+	}
+	return *newMatrix;
+}
 
 double & Matrix::operator()(unsigned int _row, unsigned int _col) {
 	return matrix[_row * columns + _col];

@@ -5,6 +5,7 @@ namespace Matrixcalculator {
 
 	Matrix MatrixA;
 	Matrix MatrixB;
+	Matrix ResultMatrix;
 
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -23,8 +24,7 @@ namespace Matrixcalculator {
 		{
 			MatrixA = Matrix(1, 1);
 			MatrixB = Matrix(1, 1);
-			// printMatrix(MatrixA, dataGridViewMatrixA);
-			// printMatrix(MatrixB, dataGridViewMatrixB);
+
 			InitializeComponent();
 		}
 
@@ -91,6 +91,13 @@ namespace Matrixcalculator {
 
 	private: System::Windows::Forms::Label^  label10;
 	private: System::Windows::Forms::Button^  InverteMatrixB;
+	private: System::Windows::Forms::Label^  label12;
+	private: System::Windows::Forms::Label^  label11;
+	private: System::Windows::Forms::Button^  CopyResultMatrixToMatrixB;
+	private: System::Windows::Forms::Button^  CopyResultMatrixToMatrixA;
+	private: System::Windows::Forms::CheckBox^  isSquareMatrixA;
+	private: System::Windows::Forms::CheckBox^  isSquareMatrixB;
+
 
 
 
@@ -116,6 +123,7 @@ namespace Matrixcalculator {
 		void InitializeComponent(void)
 		{
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->isSquareMatrixA = (gcnew System::Windows::Forms::CheckBox());
 			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->InverteMatrixA = (gcnew System::Windows::Forms::Button());
 			this->label7 = (gcnew System::Windows::Forms::Label());
@@ -128,6 +136,7 @@ namespace Matrixcalculator {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->dataGridViewMatrixA = (gcnew System::Windows::Forms::DataGridView());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->isSquareMatrixB = (gcnew System::Windows::Forms::CheckBox());
 			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->CopyAtoB = (gcnew System::Windows::Forms::Button());
 			this->InverteMatrixB = (gcnew System::Windows::Forms::Button());
@@ -145,6 +154,10 @@ namespace Matrixcalculator {
 			this->multiply = (gcnew System::Windows::Forms::Button());
 			this->divide = (gcnew System::Windows::Forms::Button());
 			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
+			this->label12 = (gcnew System::Windows::Forms::Label());
+			this->label11 = (gcnew System::Windows::Forms::Label());
+			this->CopyResultMatrixToMatrixB = (gcnew System::Windows::Forms::Button());
+			this->CopyResultMatrixToMatrixA = (gcnew System::Windows::Forms::Button());
 			this->ColumnsResultMatrix = (gcnew System::Windows::Forms::TextBox());
 			this->RowsResultMatrix = (gcnew System::Windows::Forms::TextBox());
 			this->label5 = (gcnew System::Windows::Forms::Label());
@@ -165,6 +178,7 @@ namespace Matrixcalculator {
 			// groupBox1
 			// 
 			this->groupBox1->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->groupBox1->Controls->Add(this->isSquareMatrixA);
 			this->groupBox1->Controls->Add(this->label9);
 			this->groupBox1->Controls->Add(this->InverteMatrixA);
 			this->groupBox1->Controls->Add(this->label7);
@@ -184,6 +198,18 @@ namespace Matrixcalculator {
 			this->groupBox1->TabIndex = 0;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Matrix A";
+			// 
+			// isSquareMatrixA
+			// 
+			this->isSquareMatrixA->AutoSize = true;
+			this->isSquareMatrixA->Checked = true;
+			this->isSquareMatrixA->CheckState = System::Windows::Forms::CheckState::Checked;
+			this->isSquareMatrixA->Location = System::Drawing::Point(80, 58);
+			this->isSquareMatrixA->Name = L"isSquareMatrixA";
+			this->isSquareMatrixA->Size = System::Drawing::Size(60, 17);
+			this->isSquareMatrixA->TabIndex = 11;
+			this->isSquareMatrixA->Text = L"Square";
+			this->isSquareMatrixA->UseVisualStyleBackColor = true;
 			// 
 			// label9
 			// 
@@ -250,7 +276,7 @@ namespace Matrixcalculator {
 			// RowsMatrixA
 			// 
 			this->RowsMatrixA->Location = System::Drawing::Point(26, 32);
-			this->RowsMatrixA->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 15, 0, 0, 0 });
+			this->RowsMatrixA->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 9, 0, 0, 0 });
 			this->RowsMatrixA->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->RowsMatrixA->Name = L"RowsMatrixA";
 			this->RowsMatrixA->Size = System::Drawing::Size(66, 20);
@@ -262,7 +288,7 @@ namespace Matrixcalculator {
 			// ColumnsMatrixA
 			// 
 			this->ColumnsMatrixA->Location = System::Drawing::Point(119, 32);
-			this->ColumnsMatrixA->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 15, 0, 0, 0 });
+			this->ColumnsMatrixA->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 9, 0, 0, 0 });
 			this->ColumnsMatrixA->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->ColumnsMatrixA->Name = L"ColumnsMatrixA";
 			this->ColumnsMatrixA->Size = System::Drawing::Size(66, 20);
@@ -292,7 +318,6 @@ namespace Matrixcalculator {
 			// dataGridViewMatrixA
 			// 
 			this->dataGridViewMatrixA->AllowUserToAddRows = false;
-			this->dataGridViewMatrixA->ClipboardCopyMode = System::Windows::Forms::DataGridViewClipboardCopyMode::EnableWithoutHeaderText;
 			this->dataGridViewMatrixA->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridViewMatrixA->Location = System::Drawing::Point(6, 76);
 			this->dataGridViewMatrixA->Name = L"dataGridViewMatrixA";
@@ -303,6 +328,7 @@ namespace Matrixcalculator {
 			// groupBox2
 			// 
 			this->groupBox2->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->groupBox2->Controls->Add(this->isSquareMatrixB);
 			this->groupBox2->Controls->Add(this->label10);
 			this->groupBox2->Controls->Add(this->CopyAtoB);
 			this->groupBox2->Controls->Add(this->InverteMatrixB);
@@ -323,6 +349,18 @@ namespace Matrixcalculator {
 			this->groupBox2->TabIndex = 2;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Matrix B";
+			// 
+			// isSquareMatrixB
+			// 
+			this->isSquareMatrixB->AutoSize = true;
+			this->isSquareMatrixB->Checked = true;
+			this->isSquareMatrixB->CheckState = System::Windows::Forms::CheckState::Checked;
+			this->isSquareMatrixB->Location = System::Drawing::Point(80, 58);
+			this->isSquareMatrixB->Name = L"isSquareMatrixB";
+			this->isSquareMatrixB->Size = System::Drawing::Size(60, 17);
+			this->isSquareMatrixB->TabIndex = 11;
+			this->isSquareMatrixB->Text = L"Square";
+			this->isSquareMatrixB->UseVisualStyleBackColor = true;
 			// 
 			// label10
 			// 
@@ -399,7 +437,7 @@ namespace Matrixcalculator {
 			// RowsMatrixB
 			// 
 			this->RowsMatrixB->Location = System::Drawing::Point(31, 32);
-			this->RowsMatrixB->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 15, 0, 0, 0 });
+			this->RowsMatrixB->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 9, 0, 0, 0 });
 			this->RowsMatrixB->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->RowsMatrixB->Name = L"RowsMatrixB";
 			this->RowsMatrixB->Size = System::Drawing::Size(66, 20);
@@ -411,7 +449,7 @@ namespace Matrixcalculator {
 			// ColumnsMatrixB
 			// 
 			this->ColumnsMatrixB->Location = System::Drawing::Point(124, 32);
-			this->ColumnsMatrixB->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 15, 0, 0, 0 });
+			this->ColumnsMatrixB->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 9, 0, 0, 0 });
 			this->ColumnsMatrixB->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->ColumnsMatrixB->Name = L"ColumnsMatrixB";
 			this->ColumnsMatrixB->Size = System::Drawing::Size(66, 20);
@@ -503,6 +541,10 @@ namespace Matrixcalculator {
 			// groupBox3
 			// 
 			this->groupBox3->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->groupBox3->Controls->Add(this->label12);
+			this->groupBox3->Controls->Add(this->label11);
+			this->groupBox3->Controls->Add(this->CopyResultMatrixToMatrixB);
+			this->groupBox3->Controls->Add(this->CopyResultMatrixToMatrixA);
 			this->groupBox3->Controls->Add(this->ColumnsResultMatrix);
 			this->groupBox3->Controls->Add(this->RowsResultMatrix);
 			this->groupBox3->Controls->Add(this->label5);
@@ -517,9 +559,47 @@ namespace Matrixcalculator {
 			this->groupBox3->TabStop = false;
 			this->groupBox3->Text = L"Result Matrix";
 			// 
+			// label12
+			// 
+			this->label12->AutoSize = true;
+			this->label12->Location = System::Drawing::Point(370, 25);
+			this->label12->Name = L"label12";
+			this->label12->Size = System::Drawing::Size(84, 13);
+			this->label12->TabIndex = 8;
+			this->label12->Text = L"Copy to Matrix B";
+			// 
+			// label11
+			// 
+			this->label11->AutoSize = true;
+			this->label11->Location = System::Drawing::Point(7, 25);
+			this->label11->Name = L"label11";
+			this->label11->Size = System::Drawing::Size(84, 13);
+			this->label11->TabIndex = 8;
+			this->label11->Text = L"Copy to Matrix A";
+			// 
+			// CopyResultMatrixToMatrixB
+			// 
+			this->CopyResultMatrixToMatrixB->Location = System::Drawing::Point(382, 38);
+			this->CopyResultMatrixToMatrixB->Name = L"CopyResultMatrixToMatrixB";
+			this->CopyResultMatrixToMatrixB->Size = System::Drawing::Size(72, 25);
+			this->CopyResultMatrixToMatrixB->TabIndex = 7;
+			this->CopyResultMatrixToMatrixB->Text = L"Copy";
+			this->CopyResultMatrixToMatrixB->UseVisualStyleBackColor = true;
+			this->CopyResultMatrixToMatrixB->Click += gcnew System::EventHandler(this, &MainForm::CopyResultMatrixToMatrixB_Click);
+			// 
+			// CopyResultMatrixToMatrixA
+			// 
+			this->CopyResultMatrixToMatrixA->Location = System::Drawing::Point(6, 38);
+			this->CopyResultMatrixToMatrixA->Name = L"CopyResultMatrixToMatrixA";
+			this->CopyResultMatrixToMatrixA->Size = System::Drawing::Size(72, 25);
+			this->CopyResultMatrixToMatrixA->TabIndex = 7;
+			this->CopyResultMatrixToMatrixA->Text = L"Copy";
+			this->CopyResultMatrixToMatrixA->UseVisualStyleBackColor = true;
+			this->CopyResultMatrixToMatrixA->Click += gcnew System::EventHandler(this, &MainForm::CopyResultMatrixToMatrixA_Click);
+			// 
 			// ColumnsResultMatrix
 			// 
-			this->ColumnsResultMatrix->Location = System::Drawing::Point(116, 32);
+			this->ColumnsResultMatrix->Location = System::Drawing::Point(246, 41);
 			this->ColumnsResultMatrix->Name = L"ColumnsResultMatrix";
 			this->ColumnsResultMatrix->ReadOnly = true;
 			this->ColumnsResultMatrix->Size = System::Drawing::Size(66, 20);
@@ -529,7 +609,7 @@ namespace Matrixcalculator {
 			// 
 			// RowsResultMatrix
 			// 
-			this->RowsResultMatrix->Location = System::Drawing::Point(25, 32);
+			this->RowsResultMatrix->Location = System::Drawing::Point(155, 41);
 			this->RowsResultMatrix->Name = L"RowsResultMatrix";
 			this->RowsResultMatrix->ReadOnly = true;
 			this->RowsResultMatrix->Size = System::Drawing::Size(66, 20);
@@ -540,7 +620,7 @@ namespace Matrixcalculator {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(126, 16);
+			this->label5->Location = System::Drawing::Point(256, 25);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(47, 13);
 			this->label5->TabIndex = 5;
@@ -550,8 +630,8 @@ namespace Matrixcalculator {
 			// 
 			this->dataGridViewResultMatrix->AllowUserToAddRows = false;
 			this->dataGridViewResultMatrix->AllowUserToDeleteRows = false;
-			this->dataGridViewResultMatrix->AllowUserToResizeColumns = false;
 			this->dataGridViewResultMatrix->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridViewResultMatrix->ImeMode = System::Windows::Forms::ImeMode::NoControl;
 			this->dataGridViewResultMatrix->Location = System::Drawing::Point(6, 76);
 			this->dataGridViewResultMatrix->Name = L"dataGridViewResultMatrix";
 			this->dataGridViewResultMatrix->ReadOnly = true;
@@ -561,7 +641,7 @@ namespace Matrixcalculator {
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(41, 16);
+			this->label6->Location = System::Drawing::Point(171, 25);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(34, 13);
 			this->label6->TabIndex = 4;
@@ -603,6 +683,11 @@ namespace Matrixcalculator {
 
 		}
 #pragma endregion
+	// function to check is matrix square
+	private: bool isSquare(Matrix & mt) {
+		return (mt.GetRows() == mt.GetColumns());
+	}
+
 	// function to check dimensions equality of matrixes 
 	private: bool isSameSizes(Matrix & mt1, Matrix & mt2) {
 		return (mt1.GetRows() == mt2.GetRows() && mt1.GetColumns() == mt2.GetColumns());
@@ -623,7 +708,7 @@ namespace Matrixcalculator {
 	
 	// function to generate random double number
 	private: double randomDouble(double min, double max) {
-		return round(((double)rand() / (double)RAND_MAX * (max - min) + min) * 10000) / 10000.;
+		return round(((double)rand() / (double)RAND_MAX * (max - min) + min) * 1000) / 1000.;
 	}
 
 	// function to change value of matrix at user input
@@ -634,7 +719,7 @@ namespace Matrixcalculator {
 			return;
 
 		if (!Double::TryParse(Convert::ToString(dataGridView->CurrentCell->Value), newValue)) {
-			MessageBox::Show("Матрица может содержать только числа.", "Ошибка!");
+			MessageBox::Show("Matrix's elements must be numbers.", "Error!");
 			dataGridView->CurrentCell->Value = "0";
 		}
 
@@ -642,19 +727,6 @@ namespace Matrixcalculator {
 		int j = dataGridView->CurrentCell->ColumnIndex;
 
 		mt.SetValue(i, j, newValue);
-	}
-
-	// function to transpose matrix
-	private: void transposeMatrix(Matrix & mt, System::Windows::Forms::NumericUpDown^ RowsMatrix,
-									System::Windows::Forms::NumericUpDown^ ColumnsMatrix,
-									System::Windows::Forms::DataGridView^ dataGridView) {
-		Matrix newMatrix = mt.Transpose();
-		int oldRows = mt.GetRows();
-		int oldColumns = mt.GetColumns();
-		RowsMatrix->Value = oldColumns;
-		ColumnsMatrix->Value = oldRows;
-		mt = newMatrix;
-		printMatrix(mt, dataGridView);
 	}
 
 	// function to output matrix to dataGridView
@@ -687,6 +759,10 @@ namespace Matrixcalculator {
 	private: System::Void ColumnsMatrixA_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
 		int rows = Convert::ToInt32(RowsMatrixA->Value);
 		int columns = Convert::ToInt32(ColumnsMatrixA->Value);
+		if (rows == columns)
+			isSquareMatrixA->Checked = true;
+		else
+			isSquareMatrixA->Checked = false;
 		MatrixA = Matrix(rows, columns);
 		
 		printMatrix(MatrixA, dataGridViewMatrixA);
@@ -696,6 +772,10 @@ namespace Matrixcalculator {
 	private: System::Void ColumnsMatrixB_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
 		int rows = Convert::ToInt32(RowsMatrixB->Value);
 		int columns = Convert::ToInt32(ColumnsMatrixB->Value);
+		if (rows == columns)
+			isSquareMatrixB->Checked = true;
+		else
+			isSquareMatrixB->Checked = false;
 		MatrixB = Matrix(rows, columns);
 
 		printMatrix(MatrixB, dataGridViewMatrixB);
@@ -704,8 +784,10 @@ namespace Matrixcalculator {
 	// generate and print random MatrixA
 	private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
 		if (RandomizeSizesA->Checked) {
-			int rows = rand() % 15 + 1;
-			int columns = rand() % 15 + 1;
+			int rows = rand() % 9 + 1;
+			int columns = rows;
+			if (!isSquareMatrixA->Checked)
+				columns = rand() % 9 + 1;
 
 			RowsMatrixA->Value = rows;
 			ColumnsMatrixA->Value = columns;
@@ -718,8 +800,10 @@ namespace Matrixcalculator {
 	// generate and print random MatrixB
 	private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
 		if (RandomizeSizesB->Checked) {
-			int rows = rand() % 15 + 1;
-			int columns = rand() % 15 + 1;
+			int rows = rand() % 9 + 1;
+			int columns = rows;
+			if (!isSquareMatrixB->Checked)
+				columns = rand() % 9 + 1;
 
 			RowsMatrixB->Value = rows;
 			ColumnsMatrixB->Value = columns;
@@ -741,22 +825,52 @@ namespace Matrixcalculator {
 
 	// transpose and print MatrixA
 	private: System::Void TansposeMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
-		transposeMatrix(MatrixA, RowsMatrixA, ColumnsMatrixA, dataGridViewMatrixA);
+		ResultMatrix = MatrixA.Transpose();
+		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
+		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
+		printMatrix(ResultMatrix, dataGridViewResultMatrix);
 	}
 
 	// transpose and print MatrixB
 	private: System::Void TansposeMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
-		transposeMatrix(MatrixB, RowsMatrixB, ColumnsMatrixB, dataGridViewMatrixB);
+		ResultMatrix = MatrixB.Transpose();
+		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
+		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
+		printMatrix(ResultMatrix, dataGridViewResultMatrix);
 	}
 
 	// invert and print MatrixA
 	private: System::Void InverteMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
-		MessageBox::Show("Данная функция еще в разработке.", "Предупреждение");
+		if (!isSquare(MatrixA)) {
+			MessageBox::Show("Matrix must be square.", "Error!");
+			return;
+		}
+		double determinantA = MatrixA.GetDeterminant();
+		if (!determinantA) {
+			MessageBox::Show("Matrix determinant is zero.", "Error!");
+			return;
+		}
+		ResultMatrix = MatrixA.GetAdjugateMatrix() / determinantA;
+		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
+		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
+		printMatrix(ResultMatrix, dataGridViewResultMatrix);
 	}
 
 	// invert and print MatrixB
 	private: System::Void InverteMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
-		MessageBox::Show("Данная функция еще в разработке.", "Предупреждение");
+		if (!isSquare(MatrixB)) {
+			MessageBox::Show("Matrix must be square.", "Error!");
+			return;
+		}
+		double determinantB = MatrixB.GetDeterminant();
+		if (!determinantB) {
+			MessageBox::Show("Matrix determinant is zero.", "Error!");
+			return;
+		}
+		ResultMatrix = MatrixB.GetAdjugateMatrix() / determinantB;
+		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
+		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
+		printMatrix(ResultMatrix, dataGridViewResultMatrix);
 	}
 
 	// cope MatrixA to MatrixB and print MatrixB
@@ -770,42 +884,84 @@ namespace Matrixcalculator {
 	// addition of matrixes with checking
 	private: System::Void plus_Click(System::Object^  sender, System::EventArgs^  e) {
 		if (!isSameSizes(MatrixA, MatrixB)) {
-			MessageBox::Show("Размеры матриц должны совпадать.", "Ошибка!");
+			MessageBox::Show("The dimensions of the matrices must be equal.", "Error!");
 			return;
 		}
-		Matrix resultMatrix = MatrixA + MatrixB;
-		RowsResultMatrix->Text = Convert::ToString(resultMatrix.GetRows());
-		ColumnsResultMatrix->Text = Convert::ToString(resultMatrix.GetColumns());
-		printMatrix(resultMatrix, dataGridViewResultMatrix);
+		ResultMatrix = MatrixA + MatrixB;
+		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
+		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
+		printMatrix(ResultMatrix, dataGridViewResultMatrix);
 	}
 
 	// subtraction of matrixes with checking
 	private: System::Void minus_Click(System::Object^  sender, System::EventArgs^  e) {
 		if (!isSameSizes(MatrixA, MatrixB)) {
-			MessageBox::Show("Размеры матриц должны совпадать.", "Ошибка!");
+			MessageBox::Show("The dimensions of the matrices must be equal.", "Error!");
 			return;
 		}
-		Matrix resultMatrix = MatrixA - MatrixB;
-		RowsResultMatrix->Text = Convert::ToString(resultMatrix.GetRows());
-		ColumnsResultMatrix->Text = Convert::ToString(resultMatrix.GetColumns());
-		printMatrix(resultMatrix, dataGridViewResultMatrix);
+		ResultMatrix = MatrixA - MatrixB;
+		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
+		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
+		printMatrix(ResultMatrix, dataGridViewResultMatrix);
 	}
 
 	// multiplication of matrixes with checking
 	private: System::Void multiply_Click(System::Object^  sender, System::EventArgs^  e) {
 		if (!isReadyToMultiply(MatrixA, MatrixB)) {
-			MessageBox::Show("Матрицы должны быть согласованы.", "Ошибка!");
+			MessageBox::Show("The matrixes should be consistent.", "Error!");
 			return;
 		}
-		Matrix resultMatrix = MatrixA * MatrixB;
-		RowsResultMatrix->Text = Convert::ToString(resultMatrix.GetRows());
-		ColumnsResultMatrix->Text = Convert::ToString(resultMatrix.GetColumns());
-		printMatrix(resultMatrix, dataGridViewResultMatrix);
+		ResultMatrix = MatrixA * MatrixB;
+		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
+		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
+		printMatrix(ResultMatrix, dataGridViewResultMatrix);
 	}
 
 	// division of matrixes with checking
 	private: System::Void divide_Click(System::Object^  sender, System::EventArgs^  e) {
-		MessageBox::Show("Данная функция еще в разработке.", "Предупреждение");
+		if (!isSquare(MatrixB)) {
+			MessageBox::Show("Matrix must be square.", "Error!");
+			return;
+		}
+		double determinantB = MatrixB.GetDeterminant();
+		if (!determinantB) {
+			MessageBox::Show("Matrix determinant is zero.", "Error!");
+			return;
+		}
+		auto newMatrix = new Matrix();
+		*newMatrix = MatrixB.GetAdjugateMatrix() / determinantB;
+		if (!isReadyToMultiply(MatrixA, *newMatrix)) {
+			MessageBox::Show("The matrixes should be consistent.", "Error!");
+			return;
+		}
+		ResultMatrix = MatrixA * *newMatrix;
+		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
+		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
+		printMatrix(ResultMatrix, dataGridViewResultMatrix);
+	}
+
+	// copy ResultMatrix to MatrixA
+	private: System::Void CopyResultMatrixToMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
+		if (!ResultMatrix.GetRows() || !ResultMatrix.GetColumns()) {
+			MessageBox::Show("Nothing to copy.", "Error!");
+			return;
+		}
+		RowsMatrixA->Value = Convert::ToInt32(RowsResultMatrix->Text);
+		ColumnsMatrixA->Value = Convert::ToInt32(ColumnsResultMatrix->Text);
+		MatrixA = ResultMatrix;
+		printMatrix(MatrixA, dataGridViewMatrixA);
+	}
+
+	// copy ResultMatrix to MatrixB
+	private: System::Void CopyResultMatrixToMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
+		if (!ResultMatrix.GetRows() || !ResultMatrix.GetColumns()) {
+			MessageBox::Show("Nothing to copy.", "Error!");
+			return;
+		}
+		RowsMatrixB->Value = Convert::ToInt32(RowsResultMatrix->Text);
+		ColumnsMatrixB->Value = Convert::ToInt32(ColumnsResultMatrix->Text);
+		MatrixB = ResultMatrix;
+		printMatrix(MatrixB, dataGridViewMatrixB);
 	}
 };
 }
