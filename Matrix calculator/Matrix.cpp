@@ -127,7 +127,7 @@ double Matrix::GetDeterminant() const {
 	}
 }
 
-Matrix & Matrix::GetMinor(unsigned int _i, unsigned int _j) const {
+Matrix Matrix::GetMinor(unsigned int _i, unsigned int _j) const {
 	if (!rows || !columns) {
 		std::cout << "ERROR in GetMinor: matrix is empty" << std::endl;
 		return *new Matrix(*this);
@@ -141,7 +141,7 @@ Matrix & Matrix::GetMinor(unsigned int _i, unsigned int _j) const {
 	else {
 		unsigned int newRows = rows - 1;
 		unsigned int newColumns = columns - 1;
-		auto newMatrix = new Matrix(newRows, newColumns);
+		Matrix newMatrix = Matrix(newRows, newColumns);
 		unsigned int newMatrixIterator = 0;
 		for (int i = 0; i < rows; i++) {
 			if (i == _i)
@@ -149,11 +149,11 @@ Matrix & Matrix::GetMinor(unsigned int _i, unsigned int _j) const {
 			for (int j = 0; j < columns; j++) {
 				if (j == _j)
 					continue;
-				newMatrix->matrix[newMatrixIterator] = this->matrix[i * this->columns + j];
+				newMatrix.matrix[newMatrixIterator] = this->matrix[i * this->columns + j];
 				newMatrixIterator += 1;
 			}
 		}
-		return *newMatrix;
+		return newMatrix;
 	}
 }
 

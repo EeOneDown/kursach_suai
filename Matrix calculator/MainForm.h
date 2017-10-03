@@ -67,8 +67,8 @@ namespace Matrixcalculator {
 
 
 
-	private: System::Windows::Forms::Button^  button5;
-	private: System::Windows::Forms::Button^  button6;
+
+
 	private: System::Windows::Forms::GroupBox^  groupBox3;
 	private: System::Windows::Forms::TextBox^  ColumnsResultMatrix;
 
@@ -79,13 +79,13 @@ namespace Matrixcalculator {
 
 	private: System::Windows::Forms::Label^  label6;
 
-	private: System::Windows::Forms::CheckBox^  RandomizeSizesB;
-	private: System::Windows::Forms::CheckBox^  RandomizeSizesA;
+
+
 	private: System::Windows::Forms::Button^  TansposeMatrixA;
 	private: System::Windows::Forms::Label^  label7;
 	private: System::Windows::Forms::Label^  label8;
 	private: System::Windows::Forms::Button^  TansposeMatrixB;
-	private: System::Windows::Forms::Button^  CopyAtoB;
+
 	private: System::Windows::Forms::Label^  label9;
 	private: System::Windows::Forms::Button^  InverteMatrixA;
 
@@ -97,6 +97,11 @@ namespace Matrixcalculator {
 	private: System::Windows::Forms::Button^  CopyResultMatrixToMatrixA;
 	private: System::Windows::Forms::CheckBox^  isSquareMatrixA;
 	private: System::Windows::Forms::CheckBox^  isSquareMatrixB;
+	private: System::Windows::Forms::ComboBox^  comboBoxGenerateMatrixA;
+	private: System::Windows::Forms::Button^  GenerateMatrixA;
+	private: System::Windows::Forms::Button^  GenerateMatrixB;
+	private: System::Windows::Forms::ComboBox^  comboBoxGenerateMatrixB;
+
 
 
 
@@ -123,27 +128,26 @@ namespace Matrixcalculator {
 		void InitializeComponent(void)
 		{
 			this->groupBox1 = (gcnew System::Windows::Forms::GroupBox());
+			this->GenerateMatrixA = (gcnew System::Windows::Forms::Button());
+			this->comboBoxGenerateMatrixA = (gcnew System::Windows::Forms::ComboBox());
 			this->isSquareMatrixA = (gcnew System::Windows::Forms::CheckBox());
 			this->label9 = (gcnew System::Windows::Forms::Label());
 			this->InverteMatrixA = (gcnew System::Windows::Forms::Button());
 			this->label7 = (gcnew System::Windows::Forms::Label());
 			this->TansposeMatrixA = (gcnew System::Windows::Forms::Button());
-			this->RandomizeSizesA = (gcnew System::Windows::Forms::CheckBox());
-			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->RowsMatrixA = (gcnew System::Windows::Forms::NumericUpDown());
 			this->ColumnsMatrixA = (gcnew System::Windows::Forms::NumericUpDown());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->dataGridViewMatrixA = (gcnew System::Windows::Forms::DataGridView());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->GenerateMatrixB = (gcnew System::Windows::Forms::Button());
 			this->isSquareMatrixB = (gcnew System::Windows::Forms::CheckBox());
+			this->comboBoxGenerateMatrixB = (gcnew System::Windows::Forms::ComboBox());
 			this->label10 = (gcnew System::Windows::Forms::Label());
-			this->CopyAtoB = (gcnew System::Windows::Forms::Button());
 			this->InverteMatrixB = (gcnew System::Windows::Forms::Button());
 			this->label8 = (gcnew System::Windows::Forms::Label());
-			this->RandomizeSizesB = (gcnew System::Windows::Forms::CheckBox());
 			this->TansposeMatrixB = (gcnew System::Windows::Forms::Button());
-			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->RowsMatrixB = (gcnew System::Windows::Forms::NumericUpDown());
 			this->ColumnsMatrixB = (gcnew System::Windows::Forms::NumericUpDown());
 			this->label3 = (gcnew System::Windows::Forms::Label());
@@ -178,13 +182,13 @@ namespace Matrixcalculator {
 			// groupBox1
 			// 
 			this->groupBox1->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->groupBox1->Controls->Add(this->GenerateMatrixA);
+			this->groupBox1->Controls->Add(this->comboBoxGenerateMatrixA);
 			this->groupBox1->Controls->Add(this->isSquareMatrixA);
 			this->groupBox1->Controls->Add(this->label9);
 			this->groupBox1->Controls->Add(this->InverteMatrixA);
 			this->groupBox1->Controls->Add(this->label7);
 			this->groupBox1->Controls->Add(this->TansposeMatrixA);
-			this->groupBox1->Controls->Add(this->RandomizeSizesA);
-			this->groupBox1->Controls->Add(this->button5);
 			this->groupBox1->Controls->Add(this->RowsMatrixA);
 			this->groupBox1->Controls->Add(this->ColumnsMatrixA);
 			this->groupBox1->Controls->Add(this->label2);
@@ -198,6 +202,32 @@ namespace Matrixcalculator {
 			this->groupBox1->TabIndex = 0;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Matrix A";
+			// 
+			// GenerateMatrixA
+			// 
+			this->GenerateMatrixA->Location = System::Drawing::Point(355, 46);
+			this->GenerateMatrixA->Name = L"GenerateMatrixA";
+			this->GenerateMatrixA->Size = System::Drawing::Size(75, 23);
+			this->GenerateMatrixA->TabIndex = 12;
+			this->GenerateMatrixA->Text = L"Generate";
+			this->GenerateMatrixA->UseVisualStyleBackColor = true;
+			this->GenerateMatrixA->Click += gcnew System::EventHandler(this, &MainForm::GenerateMatrixA_Click);
+			// 
+			// comboBoxGenerateMatrixA
+			// 
+			this->comboBoxGenerateMatrixA->AutoCompleteMode = System::Windows::Forms::AutoCompleteMode::Append;
+			this->comboBoxGenerateMatrixA->AutoCompleteSource = System::Windows::Forms::AutoCompleteSource::ListItems;
+			this->comboBoxGenerateMatrixA->FormattingEnabled = true;
+			this->comboBoxGenerateMatrixA->Items->AddRange(gcnew cli::array< System::Object^  >(4) {
+				L"Copy from B", L"Randomize", L"Randomize with sizes",
+					L"Zeros"
+			});
+			this->comboBoxGenerateMatrixA->Location = System::Drawing::Point(333, 19);
+			this->comboBoxGenerateMatrixA->Name = L"comboBoxGenerateMatrixA";
+			this->comboBoxGenerateMatrixA->Size = System::Drawing::Size(121, 21);
+			this->comboBoxGenerateMatrixA->TabIndex = 4;
+			this->comboBoxGenerateMatrixA->Text = L"Zeros";
+			this->comboBoxGenerateMatrixA->SelectionChangeCommitted += gcnew System::EventHandler(this, &MainForm::comboBox1_SelectedIndexChanged);
 			// 
 			// isSquareMatrixA
 			// 
@@ -252,26 +282,6 @@ namespace Matrixcalculator {
 			this->TansposeMatrixA->Text = L"T";
 			this->TansposeMatrixA->UseVisualStyleBackColor = true;
 			this->TansposeMatrixA->Click += gcnew System::EventHandler(this, &MainForm::TansposeMatrixA_Click);
-			// 
-			// RandomizeSizesA
-			// 
-			this->RandomizeSizesA->AutoSize = true;
-			this->RandomizeSizesA->Location = System::Drawing::Point(346, 58);
-			this->RandomizeSizesA->Name = L"RandomizeSizesA";
-			this->RandomizeSizesA->Size = System::Drawing::Size(105, 17);
-			this->RandomizeSizesA->TabIndex = 6;
-			this->RandomizeSizesA->Text = L"Randomize sizes";
-			this->RandomizeSizesA->UseVisualStyleBackColor = true;
-			// 
-			// button5
-			// 
-			this->button5->Location = System::Drawing::Point(358, 32);
-			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(75, 23);
-			this->button5->TabIndex = 5;
-			this->button5->Text = L"Randomize";
-			this->button5->UseVisualStyleBackColor = true;
-			this->button5->Click += gcnew System::EventHandler(this, &MainForm::button5_Click);
 			// 
 			// RowsMatrixA
 			// 
@@ -328,14 +338,13 @@ namespace Matrixcalculator {
 			// groupBox2
 			// 
 			this->groupBox2->Anchor = System::Windows::Forms::AnchorStyles::None;
+			this->groupBox2->Controls->Add(this->GenerateMatrixB);
 			this->groupBox2->Controls->Add(this->isSquareMatrixB);
+			this->groupBox2->Controls->Add(this->comboBoxGenerateMatrixB);
 			this->groupBox2->Controls->Add(this->label10);
-			this->groupBox2->Controls->Add(this->CopyAtoB);
 			this->groupBox2->Controls->Add(this->InverteMatrixB);
 			this->groupBox2->Controls->Add(this->label8);
-			this->groupBox2->Controls->Add(this->RandomizeSizesB);
 			this->groupBox2->Controls->Add(this->TansposeMatrixB);
-			this->groupBox2->Controls->Add(this->button6);
 			this->groupBox2->Controls->Add(this->RowsMatrixB);
 			this->groupBox2->Controls->Add(this->ColumnsMatrixB);
 			this->groupBox2->Controls->Add(this->label3);
@@ -350,6 +359,16 @@ namespace Matrixcalculator {
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Matrix B";
 			// 
+			// GenerateMatrixB
+			// 
+			this->GenerateMatrixB->Location = System::Drawing::Point(355, 46);
+			this->GenerateMatrixB->Name = L"GenerateMatrixB";
+			this->GenerateMatrixB->Size = System::Drawing::Size(75, 23);
+			this->GenerateMatrixB->TabIndex = 12;
+			this->GenerateMatrixB->Text = L"Generate";
+			this->GenerateMatrixB->UseVisualStyleBackColor = true;
+			this->GenerateMatrixB->Click += gcnew System::EventHandler(this, &MainForm::GenerateMatrixB_Click);
+			// 
 			// isSquareMatrixB
 			// 
 			this->isSquareMatrixB->AutoSize = true;
@@ -362,6 +381,22 @@ namespace Matrixcalculator {
 			this->isSquareMatrixB->Text = L"Square";
 			this->isSquareMatrixB->UseVisualStyleBackColor = true;
 			// 
+			// comboBoxGenerateMatrixB
+			// 
+			this->comboBoxGenerateMatrixB->AutoCompleteMode = System::Windows::Forms::AutoCompleteMode::Append;
+			this->comboBoxGenerateMatrixB->AutoCompleteSource = System::Windows::Forms::AutoCompleteSource::ListItems;
+			this->comboBoxGenerateMatrixB->FormattingEnabled = true;
+			this->comboBoxGenerateMatrixB->Items->AddRange(gcnew cli::array< System::Object^  >(4) {
+				L"Copy from A", L"Randomize", L"Randomize with sizes",
+					L"Zeros"
+			});
+			this->comboBoxGenerateMatrixB->Location = System::Drawing::Point(333, 19);
+			this->comboBoxGenerateMatrixB->Name = L"comboBoxGenerateMatrixB";
+			this->comboBoxGenerateMatrixB->Size = System::Drawing::Size(121, 21);
+			this->comboBoxGenerateMatrixB->TabIndex = 4;
+			this->comboBoxGenerateMatrixB->Text = L"Zeros";
+			this->comboBoxGenerateMatrixB->SelectionChangeCommitted += gcnew System::EventHandler(this, &MainForm::comboBoxGenerateMatrixB_SelectedIndexChanged);
+			// 
 			// label10
 			// 
 			this->label10->AutoSize = true;
@@ -370,16 +405,6 @@ namespace Matrixcalculator {
 			this->label10->Size = System::Drawing::Size(34, 13);
 			this->label10->TabIndex = 10;
 			this->label10->Text = L"Invert";
-			// 
-			// CopyAtoB
-			// 
-			this->CopyAtoB->Location = System::Drawing::Point(358, 8);
-			this->CopyAtoB->Name = L"CopyAtoB";
-			this->CopyAtoB->Size = System::Drawing::Size(75, 23);
-			this->CopyAtoB->TabIndex = 9;
-			this->CopyAtoB->Text = L"Copy";
-			this->CopyAtoB->UseVisualStyleBackColor = true;
-			this->CopyAtoB->Click += gcnew System::EventHandler(this, &MainForm::CopyAtoB_Click);
 			// 
 			// InverteMatrixB
 			// 
@@ -402,16 +427,6 @@ namespace Matrixcalculator {
 			this->label8->TabIndex = 8;
 			this->label8->Text = L"Transpose";
 			// 
-			// RandomizeSizesB
-			// 
-			this->RandomizeSizesB->AutoSize = true;
-			this->RandomizeSizesB->Location = System::Drawing::Point(346, 58);
-			this->RandomizeSizesB->Name = L"RandomizeSizesB";
-			this->RandomizeSizesB->Size = System::Drawing::Size(105, 17);
-			this->RandomizeSizesB->TabIndex = 6;
-			this->RandomizeSizesB->Text = L"Randomize sizes";
-			this->RandomizeSizesB->UseVisualStyleBackColor = true;
-			// 
 			// TansposeMatrixB
 			// 
 			this->TansposeMatrixB->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 16, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
@@ -423,16 +438,6 @@ namespace Matrixcalculator {
 			this->TansposeMatrixB->Text = L"T";
 			this->TansposeMatrixB->UseVisualStyleBackColor = true;
 			this->TansposeMatrixB->Click += gcnew System::EventHandler(this, &MainForm::TansposeMatrixB_Click);
-			// 
-			// button6
-			// 
-			this->button6->Location = System::Drawing::Point(358, 32);
-			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(75, 23);
-			this->button6->TabIndex = 5;
-			this->button6->Text = L"Randomize";
-			this->button6->UseVisualStyleBackColor = true;
-			this->button6->Click += gcnew System::EventHandler(this, &MainForm::button6_Click);
 			// 
 			// RowsMatrixB
 			// 
@@ -660,6 +665,7 @@ namespace Matrixcalculator {
 			this->Controls->Add(this->groupBox3);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->groupBox1);
+			this->Cursor = System::Windows::Forms::Cursors::Default;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::Fixed3D;
 			this->MaximizeBox = false;
 			this->Name = L"MainForm";
@@ -683,6 +689,54 @@ namespace Matrixcalculator {
 
 		}
 #pragma endregion
+	// finction to check generation, generate and print matrix
+	private: void generateAndPrintMatrix(Matrix & mt, System::String ^ comboBoxText,
+		System::Windows::Forms::DataGridView^ dataGridView, System::Windows::Forms::NumericUpDown^ numericRows,
+		System::Windows::Forms::NumericUpDown^ numericColumns, System::Windows::Forms::CheckBox^ isSquare) {
+		if (comboBoxText == "Copy from A") {
+			RowsMatrixB->Value = MatrixA.GetRows();
+			ColumnsMatrixB->Value = MatrixA.GetColumns();
+
+			MatrixB = MatrixA;
+			printMatrix(MatrixB, dataGridViewMatrixB);
+		}
+		else if (comboBoxText == "Copy from B") {
+			RowsMatrixA->Value = MatrixB.GetRows();
+			ColumnsMatrixA->Value = MatrixB.GetColumns();
+
+			MatrixA = MatrixB;
+			printMatrix(MatrixA, dataGridViewMatrixA);
+		}
+		else if (comboBoxText == "Randomize") {
+			int rows = Convert::ToInt32(numericRows->Text);
+			int columns = Convert::ToInt32(numericColumns->Text);
+
+			mt = Matrix(rows, columns);
+			randomizeMatrixValues(mt, -1000, 1000);
+			printMatrix(mt, dataGridView);
+		}
+		else if (comboBoxText == "Randomize with sizes") {
+			int rows = rand() % 9 + 1;
+			int columns = rows;
+			if (!isSquare->Checked)
+				columns = rand() % 9 + 1;
+
+			numericRows->Value = rows;
+			numericColumns->Value = columns;
+
+			mt = Matrix(rows, columns);
+			randomizeMatrixValues(mt, -1000, 1000);
+			printMatrix(mt, dataGridView);
+		}
+		else if (comboBoxText == "Zeros") {
+			int rows = Convert::ToInt32(numericRows->Text);
+			int columns = Convert::ToInt32(numericColumns->Text);
+
+			mt = Matrix(rows, columns);
+			printMatrix(mt, dataGridView);
+		}
+	}
+
 	// function to check is matrix square
 	private: bool isSquare(Matrix & mt) {
 		return (mt.GetRows() == mt.GetColumns());
@@ -763,9 +817,6 @@ namespace Matrixcalculator {
 			isSquareMatrixA->Checked = true;
 		else
 			isSquareMatrixA->Checked = false;
-		MatrixA = Matrix(rows, columns);
-		
-		printMatrix(MatrixA, dataGridViewMatrixA);
 	}
 
 	// change MatrixB when user changes sizes
@@ -776,41 +827,6 @@ namespace Matrixcalculator {
 			isSquareMatrixB->Checked = true;
 		else
 			isSquareMatrixB->Checked = false;
-		MatrixB = Matrix(rows, columns);
-
-		printMatrix(MatrixB, dataGridViewMatrixB);
-	}
-
-	// generate and print random MatrixA
-	private: System::Void button5_Click(System::Object^  sender, System::EventArgs^  e) {
-		if (RandomizeSizesA->Checked) {
-			int rows = rand() % 9 + 1;
-			int columns = rows;
-			if (!isSquareMatrixA->Checked)
-				columns = rand() % 9 + 1;
-
-			RowsMatrixA->Value = rows;
-			ColumnsMatrixA->Value = columns;
-		}
-
-		randomizeMatrixValues(MatrixA, -1000, 1000);
-		printMatrix(MatrixA, dataGridViewMatrixA);
-	}
-
-	// generate and print random MatrixB
-	private: System::Void button6_Click(System::Object^  sender, System::EventArgs^  e) {
-		if (RandomizeSizesB->Checked) {
-			int rows = rand() % 9 + 1;
-			int columns = rows;
-			if (!isSquareMatrixB->Checked)
-				columns = rand() % 9 + 1;
-
-			RowsMatrixB->Value = rows;
-			ColumnsMatrixB->Value = columns;
-		}
-
-		randomizeMatrixValues(MatrixB, -100, 100);
-		printMatrix(MatrixB, dataGridViewMatrixB);
 	}
 
 	// change value of MatrixA at user input
@@ -841,12 +857,15 @@ namespace Matrixcalculator {
 
 	// invert and print MatrixA
 	private: System::Void InverteMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
+		this->Cursor = System::Windows::Forms::Cursors::AppStarting;
 		if (!isSquare(MatrixA)) {
+			this->Cursor = System::Windows::Forms::Cursors::Default;
 			MessageBox::Show("Matrix must be square.", "Error!");
 			return;
 		}
 		double determinantA = MatrixA.GetDeterminant();
 		if (!determinantA) {
+			this->Cursor = System::Windows::Forms::Cursors::Default;
 			MessageBox::Show("Matrix determinant is zero.", "Error!");
 			return;
 		}
@@ -854,16 +873,20 @@ namespace Matrixcalculator {
 		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
 		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
 		printMatrix(ResultMatrix, dataGridViewResultMatrix);
+		this->Cursor = System::Windows::Forms::Cursors::Default;
 	}
 
 	// invert and print MatrixB
 	private: System::Void InverteMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
+		this->Cursor = System::Windows::Forms::Cursors::AppStarting;
 		if (!isSquare(MatrixB)) {
+			this->Cursor = System::Windows::Forms::Cursors::Default;
 			MessageBox::Show("Matrix must be square.", "Error!");
 			return;
 		}
 		double determinantB = MatrixB.GetDeterminant();
 		if (!determinantB) {
+			this->Cursor = System::Windows::Forms::Cursors::Default;
 			MessageBox::Show("Matrix determinant is zero.", "Error!");
 			return;
 		}
@@ -871,14 +894,7 @@ namespace Matrixcalculator {
 		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
 		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
 		printMatrix(ResultMatrix, dataGridViewResultMatrix);
-	}
-
-	// cope MatrixA to MatrixB and print MatrixB
-	private: System::Void CopyAtoB_Click(System::Object^  sender, System::EventArgs^  e) {
-		RowsMatrixB->Value = RowsMatrixA->Value;
-		ColumnsMatrixB->Value = ColumnsMatrixA->Value;
-		MatrixB = MatrixA;
-		printMatrix(MatrixB, dataGridViewMatrixB);
+		this->Cursor = System::Windows::Forms::Cursors::Default;
 	}
 
 	// addition of matrixes with checking
@@ -907,30 +923,46 @@ namespace Matrixcalculator {
 
 	// multiplication of matrixes with checking
 	private: System::Void multiply_Click(System::Object^  sender, System::EventArgs^  e) {
-		if (!isReadyToMultiply(MatrixA, MatrixB)) {
+		this->Cursor = System::Windows::Forms::Cursors::AppStarting;
+		if (MatrixB.GetRows() == 1 && MatrixB.GetColumns() == 1 && (MatrixA.GetColumns() > 1 || MatrixA.GetRows() > 1)) {
+			ResultMatrix = MatrixA * MatrixB(0, 0);
+			MessageBox::Show("Matrix B is number.", "Attention!");
+		}
+		else if (MatrixA.GetRows() == 1 && MatrixA.GetColumns() == 1 && (MatrixB.GetColumns() > 1 || MatrixB.GetRows() > 1)) {
+			ResultMatrix = MatrixB * MatrixA(0, 0);
+			MessageBox::Show("Matrix A is number.", "Attention!");
+		}
+		else if (!isReadyToMultiply(MatrixA, MatrixB)) {
+			this->Cursor = System::Windows::Forms::Cursors::Default;
 			MessageBox::Show("The matrixes should be consistent.", "Error!");
 			return;
 		}
-		ResultMatrix = MatrixA * MatrixB;
+		else
+			ResultMatrix = MatrixA * MatrixB;
 		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
 		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
 		printMatrix(ResultMatrix, dataGridViewResultMatrix);
+		this->Cursor = System::Windows::Forms::Cursors::Default;
 	}
 
 	// division of matrixes with checking
 	private: System::Void divide_Click(System::Object^  sender, System::EventArgs^  e) {
+		this->Cursor = System::Windows::Forms::Cursors::AppStarting;
 		if (!isSquare(MatrixB)) {
+			this->Cursor = System::Windows::Forms::Cursors::Default;
 			MessageBox::Show("Matrix must be square.", "Error!");
 			return;
 		}
 		double determinantB = MatrixB.GetDeterminant();
 		if (!determinantB) {
+			this->Cursor = System::Windows::Forms::Cursors::Default;
 			MessageBox::Show("Matrix determinant is zero.", "Error!");
 			return;
 		}
 		auto newMatrix = new Matrix();
 		*newMatrix = MatrixB.GetAdjugateMatrix() / determinantB;
 		if (!isReadyToMultiply(MatrixA, *newMatrix)) {
+			this->Cursor = System::Windows::Forms::Cursors::Default;
 			MessageBox::Show("The matrixes should be consistent.", "Error!");
 			return;
 		}
@@ -938,6 +970,7 @@ namespace Matrixcalculator {
 		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
 		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
 		printMatrix(ResultMatrix, dataGridViewResultMatrix);
+		this->Cursor = System::Windows::Forms::Cursors::Default;
 	}
 
 	// copy ResultMatrix to MatrixA
@@ -962,6 +995,28 @@ namespace Matrixcalculator {
 		ColumnsMatrixB->Value = Convert::ToInt32(ColumnsResultMatrix->Text);
 		MatrixB = ResultMatrix;
 		printMatrix(MatrixB, dataGridViewMatrixB);
+	}
+
+	// when user select how to generate MatrixA
+	private: System::Void comboBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
+		generateAndPrintMatrix(MatrixA, comboBoxGenerateMatrixA->SelectedItem->ToString(), dataGridViewMatrixA, 
+			RowsMatrixA, ColumnsMatrixA, isSquareMatrixA);
+	}
+
+	// when user press button to regenerate MatrixA
+	private: System::Void GenerateMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
+		generateAndPrintMatrix(MatrixA, comboBoxGenerateMatrixA->Text, dataGridViewMatrixA, RowsMatrixA, ColumnsMatrixA, isSquareMatrixA);
+	}
+
+	// when user select how to generate MatrixB
+	private: System::Void comboBoxGenerateMatrixB_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
+			generateAndPrintMatrix(MatrixB, comboBoxGenerateMatrixB->SelectedItem->ToString(), dataGridViewMatrixB, 
+				RowsMatrixB, ColumnsMatrixB, isSquareMatrixB);
+	}
+
+	// when user press button to regenerate MatrixA
+	private: System::Void GenerateMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
+		generateAndPrintMatrix(MatrixB, comboBoxGenerateMatrixB->Text, dataGridViewMatrixB, RowsMatrixB, ColumnsMatrixB, isSquareMatrixB);
 	}
 };
 }

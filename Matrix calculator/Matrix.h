@@ -19,8 +19,8 @@ public:
 	unsigned int GetRows() const;										// method to get count of rows
 	unsigned int GetColumns() const;									// method to get count of columns
 	double GetDeterminant() const;										// method to get determinant
-	Matrix & GetMinor(unsigned int, unsigned int) const;				// method to get minor
-	Matrix & GetAdjugateMatrix() const;			// method to get minor
+	Matrix GetMinor(unsigned int, unsigned int) const;					// method to get minor
+	Matrix & GetAdjugateMatrix() const;									// method to get adjugate matrix
 
 	Matrix &  Transpose() const;										// method to transpose
 
