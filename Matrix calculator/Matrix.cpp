@@ -180,6 +180,8 @@ Matrix & Matrix::GetAdjugateMatrix() const {
 				newMatrix->matrix[i * newMatrix->columns + j] = pusOrMinusOne * this->GetMinor(i, j).GetDeterminant();
 				pusOrMinusOne *= -1;
 			}
+			if (!(columns % 2))
+				pusOrMinusOne *= -1;
 		}
 		return newMatrix->Transpose();
 	}
