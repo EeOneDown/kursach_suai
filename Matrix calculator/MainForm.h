@@ -215,9 +215,6 @@ namespace Matrixcalculator {
 			// 
 			// comboBoxGenerateMatrixA
 			// 
-			this->comboBoxGenerateMatrixA->AutoCompleteMode = System::Windows::Forms::AutoCompleteMode::Append;
-			this->comboBoxGenerateMatrixA->AutoCompleteSource = System::Windows::Forms::AutoCompleteSource::ListItems;
-			this->comboBoxGenerateMatrixA->FormattingEnabled = true;
 			this->comboBoxGenerateMatrixA->Items->AddRange(gcnew cli::array< System::Object^  >(4) {
 				L"Copy from B", L"Randomize", L"Randomize with sizes",
 					L"Zeros"
@@ -383,9 +380,6 @@ namespace Matrixcalculator {
 			// 
 			// comboBoxGenerateMatrixB
 			// 
-			this->comboBoxGenerateMatrixB->AutoCompleteMode = System::Windows::Forms::AutoCompleteMode::Append;
-			this->comboBoxGenerateMatrixB->AutoCompleteSource = System::Windows::Forms::AutoCompleteSource::ListItems;
-			this->comboBoxGenerateMatrixB->FormattingEnabled = true;
 			this->comboBoxGenerateMatrixB->Items->AddRange(gcnew cli::array< System::Object^  >(4) {
 				L"Copy from A", L"Randomize", L"Randomize with sizes",
 					L"Zeros"
@@ -961,12 +955,17 @@ namespace Matrixcalculator {
 		}
 		auto newMatrix = new Matrix();
 		*newMatrix = MatrixB.GetAdjugateMatrix() / determinantB;
-		if (!isReadyToMultiply(MatrixA, *newMatrix)) {
+		if (MatrixB.GetRows() == 1 && MatrixB.GetColumns() == 1 && (MatrixA.GetColumns() > 1 || MatrixA.GetRows() > 1)) {
+			ResultMatrix = MatrixA * (*newMatrix)(0, 0);
+			MessageBox::Show("Matrix B is number.", "Attention!");
+		}
+		else if (!isReadyToMultiply(MatrixA, MatrixB)) {
 			this->Cursor = System::Windows::Forms::Cursors::Default;
 			MessageBox::Show("The matrixes should be consistent.", "Error!");
 			return;
 		}
-		ResultMatrix = MatrixA * *newMatrix;
+		else 
+			ResultMatrix = MatrixA * *newMatrix;
 		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
 		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
 		printMatrix(ResultMatrix, dataGridViewResultMatrix);

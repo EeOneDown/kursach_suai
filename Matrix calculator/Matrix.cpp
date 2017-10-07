@@ -13,7 +13,7 @@ Matrix::Matrix(unsigned int N, unsigned  int M) {
 		rows = N;
 		columns = M;
 		matrix = new double[rows * columns];
-		for (int i = 0; i < rows * columns; i++)
+		for (unsigned int i = 0; i < rows * columns; i++)
 			matrix[i] = 0;
 	}
 	else {
@@ -28,7 +28,7 @@ Matrix::Matrix(const double * arr, unsigned int N, unsigned int M) {
 		rows = N;
 		columns = M;
 		matrix = new double[rows * columns];
-		for (int i = 0; i < rows * columns; i++)
+		for (unsigned int i = 0; i < rows * columns; i++)
 			matrix[i] = arr[i];
 	}
 	else {
@@ -42,8 +42,8 @@ Matrix::Matrix(const Matrix & mt) {
 	columns = mt.columns;
 	if (mt.matrix) {
 		matrix = new double[rows * columns];
-		for (int i = 0; i < rows; i++)
-			for (int j = 0; j < columns; j++)
+		for (unsigned int i = 0; i < rows; i++)
+			for (unsigned int j = 0; j < columns; j++)
 				matrix[i * columns + j] = mt.matrix[i * columns + j];
 	}
 	else {
@@ -61,7 +61,7 @@ void Matrix::SetSizes(unsigned int N, unsigned int M) {
 		rows = N;
 		columns = M;
 		matrix = new double[rows * columns];
-		for (int i = 0; i < rows * columns; i++)
+		for (unsigned int i = 0; i < rows * columns; i++)
 			matrix[i] = 0;
 		return;
 	}
@@ -119,7 +119,7 @@ double Matrix::GetDeterminant() const {
 	else {
 		int pusOrMinusOne = 1;
 		double determinant = 0;
-		for (int i = 0; i < columns; i++) {
+		for (unsigned int i = 0; i < columns; i++) {
 			determinant += pusOrMinusOne * matrix[i] * this->GetMinor(0, i).GetDeterminant();
 			pusOrMinusOne *= -1;
 		}
@@ -143,10 +143,10 @@ Matrix Matrix::GetMinor(unsigned int _i, unsigned int _j) const {
 		unsigned int newColumns = columns - 1;
 		Matrix newMatrix = Matrix(newRows, newColumns);
 		unsigned int newMatrixIterator = 0;
-		for (int i = 0; i < rows; i++) {
+		for (unsigned int i = 0; i < rows; i++) {
 			if (i == _i)
 				continue;
-			for (int j = 0; j < columns; j++) {
+			for (unsigned int j = 0; j < columns; j++) {
 				if (j == _j)
 					continue;
 				newMatrix.matrix[newMatrixIterator] = this->matrix[i * this->columns + j];
@@ -175,8 +175,8 @@ Matrix & Matrix::GetAdjugateMatrix() const {
 		auto newMatrix = new Matrix(this->rows, this->columns);
 		int pusOrMinusOne = 1;
 		
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < columns; j++) {
+		for (unsigned int i = 0; i < rows; i++) {
+			for (unsigned int j = 0; j < columns; j++) {
 				newMatrix->matrix[i * newMatrix->columns + j] = pusOrMinusOne * this->GetMinor(i, j).GetDeterminant();
 				pusOrMinusOne *= -1;
 			}
@@ -189,14 +189,14 @@ Matrix & Matrix::GetAdjugateMatrix() const {
 
 Matrix & Matrix::Transpose() const {
 	auto * newMt = new Matrix(this->columns, this->rows);
-	for (int i = 0; i < this->rows; i++)
-		for (int j = 0; j < this->columns; j++)
+	for (unsigned int i = 0; i < this->rows; i++)
+		for (unsigned int j = 0; j < this->columns; j++)
 			newMt->matrix[j * newMt->columns + i] = this->matrix[i * this->columns + j];
 	return *newMt;
 }
 
 Matrix & Matrix::operator-() {
-	for (int i = 0; i < rows * columns; i++)
+	for (unsigned int i = 0; i < rows * columns; i++)
 		matrix[i] = matrix[i] > 0 ? -matrix[i] : fabs(matrix[i]);
 	return *this;
 }
@@ -206,8 +206,8 @@ Matrix & Matrix::operator+(const Matrix & mt) const {
 	if (this->rows != mt.rows || this->columns != mt.columns)
 		std::cout << "ERROR in operator+: Wrong sizes" << std::endl;
 	else {
-		for (int i = 0; i < newMt->rows; i++)
-			for (int j = 0; j < newMt->columns; j++)
+		for (unsigned int i = 0; i < newMt->rows; i++)
+			for (unsigned int j = 0; j < newMt->columns; j++)
 				newMt->matrix[i * columns + j] += mt.matrix[i * columns + j];
 	}
 	return *newMt;
@@ -218,8 +218,8 @@ Matrix & Matrix::operator-(const Matrix & mt) const {
 	if (this->rows != mt.rows || this->columns != mt.columns)
 		std::cout << "ERROR in operator-: Wrong sizes" << std::endl;
 	else {
-		for (int i = 0; i < newMt->rows; i++)
-			for (int j = 0; j < newMt->columns; j++)
+		for (unsigned int i = 0; i < newMt->rows; i++)
+			for (unsigned int j = 0; j < newMt->columns; j++)
 				newMt->matrix[i * columns + j] -= mt.matrix[i * columns + j];
 	}
 	return *newMt;
@@ -230,10 +230,10 @@ Matrix &Matrix::operator*(const Matrix & mt) const {
 	if (this->matrix && mt.matrix && this->columns != mt.rows)
 		std::cout << "ERROR in operator*: Wrong sizes" << std::endl;
 	else {
-		for (int i = 0; i < newMt->rows; i++)
-			for (int j = 0; j < newMt->columns; j++) {
+		for (unsigned int i = 0; i < newMt->rows; i++)
+			for (unsigned int j = 0; j < newMt->columns; j++) {
 				double sum = 0;
-				for (int r = 0; r < this->columns; r++)
+				for (unsigned int r = 0; r < this->columns; r++)
 					sum += this->matrix[i * this->columns + r] * mt.matrix[r * mt.columns + j];
 				newMt->matrix[i * newMt->columns + j] = sum;
 			}
@@ -250,8 +250,8 @@ Matrix & Matrix::operator=(const Matrix & mt) {
 	delete[] this->matrix;
 	if (mt.matrix) {
 		matrix = new double[rows * columns];
-		for (int i = 0; i < rows; i++)
-			for (int j = 0; j < columns; j++)
+		for (unsigned int i = 0; i < rows; i++)
+			for (unsigned int j = 0; j < columns; j++)
 				matrix[i * columns + j] = mt.matrix[i * columns + j];
 	}
 	else {
@@ -261,7 +261,7 @@ Matrix & Matrix::operator=(const Matrix & mt) {
 
 Matrix & Matrix::operator*(const double number) const {
 	auto newMatrix = new Matrix(*this);
-	for (int i = 0; i < rows * columns; i++)
+	for (unsigned int i = 0; i < rows * columns; i++)
 		newMatrix->matrix[i] *= number;
 	return *newMatrix;
 }
@@ -271,7 +271,7 @@ Matrix & Matrix::operator/(const double number) const {
 	if (!number)
 		std::cout << "ERROR in operator/: Can't divide by zero" << std::endl;
 	else {
-		for (int i = 0; i < rows * columns; i++)
+		for (unsigned int i = 0; i < rows * columns; i++)
 			newMatrix->matrix[i] /= number;
 	}
 	return *newMatrix;
@@ -284,7 +284,7 @@ double & Matrix::operator()(unsigned int _row, unsigned int _col) {
 bool operator==(const Matrix & mt1, const Matrix & mt2) {
 	if (mt1.rows != mt2.rows || mt1.columns != mt2.columns)
 		return false;
-	for (int i = 0; i < mt1.rows * mt1.columns; i++)
+	for (unsigned int i = 0; i < mt1.rows * mt1.columns; i++)
 		if (mt1.matrix[i] != mt2.matrix[i])
 			return false;
 	return true;
@@ -292,8 +292,8 @@ bool operator==(const Matrix & mt1, const Matrix & mt2) {
 
 std::ostream & operator<<(std::ostream & os, const Matrix & mt) {
 	os << "Sizes: " << mt.rows << "x" << mt.columns << std::endl;
-	for (int i = 0; i < mt.rows; i++) {
-		for (int j = 0; j < mt.columns; j++)
+	for (unsigned int i = 0; i < mt.rows; i++) {
+		for (unsigned int j = 0; j < mt.columns; j++)
 			std::cout << mt.matrix[i * mt.columns + j] << "\t";
 		os << std::endl;
 	}
