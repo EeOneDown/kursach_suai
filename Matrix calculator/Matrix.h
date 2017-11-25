@@ -13,16 +13,16 @@ public:
 	Matrix(const Matrix &);												// copy constructor
 	~Matrix();															// destructor
 
-	void SetSizes(unsigned int, unsigned int);							// method to set sizes
+	bool SetSizes(unsigned int, unsigned int);							// method to set sizes
 	bool ResetSizes(unsigned int, unsigned int);						// method to reset sizes
-	void SetValue(unsigned int, unsigned int, double);					// method to change value
+	bool SetValue(unsigned int, unsigned int, double);					// method to change value
 	unsigned int GetRows() const;										// method to get count of rows
 	unsigned int GetColumns() const;									// method to get count of columns
 	double GetDeterminant() const;										// method to get determinant
 	Matrix GetMinor(unsigned int, unsigned int) const;					// method to get minor
 	Matrix & GetAdjugateMatrix() const;									// method to get adjugate matrix
 
-	Matrix &  Transpose() const;										// method to transpose
+	Matrix & Transpose() const;											// method to transpose
 
 	Matrix & operator-();												// unary operator "-"
 	Matrix & operator+(const Matrix &) const;							// binary operator "+"

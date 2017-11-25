@@ -56,14 +56,14 @@ Matrix::~Matrix() {
 		delete[] matrix;
 }
 
-void Matrix::SetSizes(unsigned int N, unsigned int M) {
+bool Matrix::SetSizes(unsigned int N, unsigned int M) {
 	if (N && M && !matrix) {
 		rows = N;
 		columns = M;
 		matrix = new double[rows * columns];
 		for (unsigned int i = 0; i < rows * columns; i++)
 			matrix[i] = 0;
-		return;
+		return true;
 	}
 	else {
 		std::cout << "ERROR in SetSizes: ";
@@ -71,7 +71,7 @@ void Matrix::SetSizes(unsigned int N, unsigned int M) {
 			std::cout << "Matrix is not empty" << std::endl;
 		else
 			std::cout << "Wrong sizes" << std::endl;
-		return;
+		return false;
 	}
 }
 
@@ -91,8 +91,12 @@ bool Matrix::ResetSizes(unsigned int N, unsigned int M) {
 	}
 }
 
-void Matrix::SetValue(unsigned int i, unsigned int j, double value) {
-	matrix[i * columns + j] = value;
+bool Matrix::SetValue(unsigned int i, unsigned int j, double value) {
+	if (i < rows && j < columns)
+		matrix[i * columns + j] = value;
+	else
+		return false;
+	return true;
 };
 
 unsigned int Matrix::GetRows() const {
@@ -257,6 +261,8 @@ Matrix & Matrix::operator=(const Matrix & mt) {
 	else {
 		matrix = nullptr;
 	}
+
+	return *this;
 };
 
 Matrix & Matrix::operator*(const double number) const {

@@ -683,339 +683,339 @@ namespace Matrixcalculator {
 
 		}
 #pragma endregion
-	// finction to check generation, generate and print matrix
-	private: void generateAndPrintMatrix(Matrix & mt, System::String ^ comboBoxText,
-		System::Windows::Forms::DataGridView^ dataGridView, System::Windows::Forms::NumericUpDown^ numericRows,
-		System::Windows::Forms::NumericUpDown^ numericColumns, System::Windows::Forms::CheckBox^ isSquare) {
-		if (comboBoxText == "Copy from A") {
-			RowsMatrixB->Value = MatrixA.GetRows();
-			ColumnsMatrixB->Value = MatrixA.GetColumns();
+		// finction to check generation, generate and print matrix
+		private: void generateAndPrintMatrix(Matrix & mt, System::String ^ comboBoxText,
+			System::Windows::Forms::DataGridView^ dataGridView, System::Windows::Forms::NumericUpDown^ numericRows,
+			System::Windows::Forms::NumericUpDown^ numericColumns, System::Windows::Forms::CheckBox^ isSquare) {
+			if (comboBoxText == "Copy from A") {
+				RowsMatrixB->Value = MatrixA.GetRows();
+				ColumnsMatrixB->Value = MatrixA.GetColumns();
 
-			MatrixB = MatrixA;
+				MatrixB = MatrixA;
+				printMatrix(MatrixB, dataGridViewMatrixB);
+			}
+			else if (comboBoxText == "Copy from B") {
+				RowsMatrixA->Value = MatrixB.GetRows();
+				ColumnsMatrixA->Value = MatrixB.GetColumns();
+
+				MatrixA = MatrixB;
+				printMatrix(MatrixA, dataGridViewMatrixA);
+			}
+			else if (comboBoxText == "Randomize") {
+				int rows = Convert::ToInt32(numericRows->Text);
+				int columns = Convert::ToInt32(numericColumns->Text);
+
+				mt = Matrix(rows, columns);
+				randomizeMatrixValues(mt, -1000, 1000);
+				printMatrix(mt, dataGridView);
+			}
+			else if (comboBoxText == "Randomize with sizes") {
+				int rows = rand() % 9 + 1;
+				int columns = rows;
+				if (!isSquare->Checked)
+					columns = rand() % 9 + 1;
+
+				numericRows->Value = rows;
+				numericColumns->Value = columns;
+
+				mt = Matrix(rows, columns);
+				randomizeMatrixValues(mt, -1000, 1000);
+				printMatrix(mt, dataGridView);
+			}
+			else if (comboBoxText == "Zeros") {
+				int rows = Convert::ToInt32(numericRows->Text);
+				int columns = Convert::ToInt32(numericColumns->Text);
+
+				mt = Matrix(rows, columns);
+				printMatrix(mt, dataGridView);
+			}
+		}
+
+		// function to check is matrix square
+		private: bool isSquare(Matrix & mt) {
+			return (mt.GetRows() == mt.GetColumns());
+		}
+
+		// function to check dimensions equality of matrixes 
+		private: bool isSameSizes(Matrix & mt1, Matrix & mt2) {
+			return (mt1.GetRows() == mt2.GetRows() && mt1.GetColumns() == mt2.GetColumns());
+		}
+	
+		// function to check consistency of matrixes
+		private: bool isReadyToMultiply(Matrix & mt1, Matrix & mt2) {
+			return (mt1.GetColumns() == mt2.GetRows());
+		}
+	
+		// function to initialize matrix of random values
+		private: void randomizeMatrixValues(Matrix & mt, double min, double max) {
+			for (unsigned int i = 0; i < mt.GetRows(); i++)
+				for (unsigned int j = 0; j < mt.GetColumns(); j++)
+					mt.SetValue(i, j, randomDouble(min, max));
+		
+		}
+	
+		// function to generate random double number
+		private: double randomDouble(double min, double max) {
+			return round(((double)rand() / (double)RAND_MAX * (max - min) + min) * 1000) / 1000.;
+		}
+
+		// function to change value of matrix at user input
+		private: void editMatrixValue(Matrix & mt, System::Windows::Forms::DataGridView^ dataGridView) {
+			double newValue;
+
+			if (!dataGridView->CurrentCell || !dataGridView->CurrentCell->Value)
+				return;
+
+			if (!Double::TryParse(Convert::ToString(dataGridView->CurrentCell->Value), newValue)) {
+				MessageBox::Show("Matrix's elements must be numbers.", "Error!");
+				dataGridView->CurrentCell->Value = "0";
+			}
+
+			int i = dataGridView->CurrentCell->RowIndex;
+			int j = dataGridView->CurrentCell->ColumnIndex;
+
+			mt.SetValue(i, j, newValue);
+		}
+
+		// function to output matrix to dataGridView
+		private: void printMatrix(Matrix & mt, System::Windows::Forms::DataGridView^ dataGridView) {
+			int Rows = mt.GetRows();
+			int Columns = mt.GetColumns();
+
+			dataGridView->RowCount = Rows;
+			dataGridView->ColumnCount = Columns;
+			dataGridView->TopLeftHeaderCell->Value = "Matrix";
+
+			for (int i = 0; i < Rows; i++) 
+				for (int j = 0; j < Columns; j++) {
+					dataGridView->Rows[i]->Cells[j]->Value = mt(i, j);
+					dataGridView->Columns[j]->HeaderCell->Value = Convert::ToString(j + 1);
+					dataGridView->Rows[i]->HeaderCell->Value = Convert::ToString(i + 1);
+				}
+			dataGridView->AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode::AutoSizeToAllHeaders);
+			dataGridView->AutoResizeColumns();
+
+		}
+
+		// print matrixes when MainForm loads
+		private: System::Void MainForm_Load(System::Object^  sender, System::EventArgs^  e) {
+			printMatrix(MatrixA, dataGridViewMatrixA);
 			printMatrix(MatrixB, dataGridViewMatrixB);
 		}
-		else if (comboBoxText == "Copy from B") {
-			RowsMatrixA->Value = MatrixB.GetRows();
-			ColumnsMatrixA->Value = MatrixB.GetColumns();
 
-			MatrixA = MatrixB;
+		// change MatrixA when user changes sizes
+		private: System::Void ColumnsMatrixA_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
+			int rows = Convert::ToInt32(RowsMatrixA->Value);
+			int columns = Convert::ToInt32(ColumnsMatrixA->Value);
+			if (rows == columns)
+				isSquareMatrixA->Checked = true;
+			else
+				isSquareMatrixA->Checked = false;
+		}
+
+		// change MatrixB when user changes sizes
+		private: System::Void ColumnsMatrixB_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
+			int rows = Convert::ToInt32(RowsMatrixB->Value);
+			int columns = Convert::ToInt32(ColumnsMatrixB->Value);
+			if (rows == columns)
+				isSquareMatrixB->Checked = true;
+			else
+				isSquareMatrixB->Checked = false;
+		}
+
+		// change value of MatrixA at user input
+		private: System::Void dataGridViewMatrixA_CellValueChanged(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
+			editMatrixValue(MatrixA, dataGridViewMatrixA);
+		}
+
+		// change value of MatrixB at user input
+		private: System::Void dataGridViewMatrixB_CellValueChanged(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
+			editMatrixValue(MatrixB, dataGridViewMatrixB);
+		}
+
+		// transpose and print MatrixA
+		private: System::Void TansposeMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
+			ResultMatrix = MatrixA.Transpose();
+			RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
+			ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
+			printMatrix(ResultMatrix, dataGridViewResultMatrix);
+		}
+
+		// transpose and print MatrixB
+		private: System::Void TansposeMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
+			ResultMatrix = MatrixB.Transpose();
+			RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
+			ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
+			printMatrix(ResultMatrix, dataGridViewResultMatrix);
+		}
+
+		// invert and print MatrixA
+		private: System::Void InverteMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->Cursor = System::Windows::Forms::Cursors::AppStarting;
+			if (!isSquare(MatrixA)) {
+				this->Cursor = System::Windows::Forms::Cursors::Default;
+				MessageBox::Show("Matrix must be square.", "Error!");
+				return;
+			}
+			double determinantA = MatrixA.GetDeterminant();
+			if (!determinantA) {
+				this->Cursor = System::Windows::Forms::Cursors::Default;
+				MessageBox::Show("Matrix determinant is zero.", "Error!");
+				return;
+			}
+			ResultMatrix = MatrixA.GetAdjugateMatrix() / determinantA;
+			RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
+			ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
+			printMatrix(ResultMatrix, dataGridViewResultMatrix);
+			this->Cursor = System::Windows::Forms::Cursors::Default;
+		}
+
+		// invert and print MatrixB
+		private: System::Void InverteMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->Cursor = System::Windows::Forms::Cursors::AppStarting;
+			if (!isSquare(MatrixB)) {
+				this->Cursor = System::Windows::Forms::Cursors::Default;
+				MessageBox::Show("Matrix must be square.", "Error!");
+				return;
+			}
+			double determinantB = MatrixB.GetDeterminant();
+			if (!determinantB) {
+				this->Cursor = System::Windows::Forms::Cursors::Default;
+				MessageBox::Show("Matrix determinant is zero.", "Error!");
+				return;
+			}
+			ResultMatrix = MatrixB.GetAdjugateMatrix() / determinantB;
+			RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
+			ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
+			printMatrix(ResultMatrix, dataGridViewResultMatrix);
+			this->Cursor = System::Windows::Forms::Cursors::Default;
+		}
+
+		// addition of matrixes with checking
+		private: System::Void plus_Click(System::Object^  sender, System::EventArgs^  e) {
+			if (!isSameSizes(MatrixA, MatrixB)) {
+				MessageBox::Show("The dimensions of the matrices must be equal.", "Error!");
+				return;
+			}
+			ResultMatrix = MatrixA + MatrixB;
+			RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
+			ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
+			printMatrix(ResultMatrix, dataGridViewResultMatrix);
+		}
+
+		// subtraction of matrixes with checking
+		private: System::Void minus_Click(System::Object^  sender, System::EventArgs^  e) {
+			if (!isSameSizes(MatrixA, MatrixB)) {
+				MessageBox::Show("The dimensions of the matrices must be equal.", "Error!");
+				return;
+			}
+			ResultMatrix = MatrixA - MatrixB;
+			RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
+			ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
+			printMatrix(ResultMatrix, dataGridViewResultMatrix);
+		}
+
+		// multiplication of matrixes with checking
+		private: System::Void multiply_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->Cursor = System::Windows::Forms::Cursors::AppStarting;
+			if (MatrixB.GetRows() == 1 && MatrixB.GetColumns() == 1 && (MatrixA.GetColumns() > 1 || MatrixA.GetRows() > 1)) {
+				ResultMatrix = MatrixA * MatrixB(0, 0);
+				MessageBox::Show("Matrix B is number.", "Attention!");
+			}
+			else if (MatrixA.GetRows() == 1 && MatrixA.GetColumns() == 1 && (MatrixB.GetColumns() > 1 || MatrixB.GetRows() > 1)) {
+				ResultMatrix = MatrixB * MatrixA(0, 0);
+				MessageBox::Show("Matrix A is number.", "Attention!");
+			}
+			else if (!isReadyToMultiply(MatrixA, MatrixB)) {
+				this->Cursor = System::Windows::Forms::Cursors::Default;
+				MessageBox::Show("The matrixes should be consistent.", "Error!");
+				return;
+			}
+			else
+				ResultMatrix = MatrixA * MatrixB;
+			RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
+			ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
+			printMatrix(ResultMatrix, dataGridViewResultMatrix);
+			this->Cursor = System::Windows::Forms::Cursors::Default;
+		}
+
+		// division of matrixes with checking
+		private: System::Void divide_Click(System::Object^  sender, System::EventArgs^  e) {
+			this->Cursor = System::Windows::Forms::Cursors::AppStarting;
+			if (!isSquare(MatrixB)) {
+				this->Cursor = System::Windows::Forms::Cursors::Default;
+				MessageBox::Show("Matrix must be square.", "Error!");
+				return;
+			}
+			double determinantB = MatrixB.GetDeterminant();
+			if (!determinantB) {
+				this->Cursor = System::Windows::Forms::Cursors::Default;
+				MessageBox::Show("Matrix determinant is zero.", "Error!");
+				return;
+			}
+			auto newMatrix = new Matrix();
+			*newMatrix = MatrixB.GetAdjugateMatrix() / determinantB;
+			if (MatrixB.GetRows() == 1 && MatrixB.GetColumns() == 1 && (MatrixA.GetColumns() > 1 || MatrixA.GetRows() > 1)) {
+				ResultMatrix = MatrixA * (*newMatrix)(0, 0);
+				MessageBox::Show("Matrix B is number.", "Attention!");
+			}
+			else if (!isReadyToMultiply(MatrixA, MatrixB)) {
+				this->Cursor = System::Windows::Forms::Cursors::Default;
+				MessageBox::Show("The matrixes should be consistent.", "Error!");
+				return;
+			}
+			else 
+				ResultMatrix = MatrixA * *newMatrix;
+			RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
+			ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
+			printMatrix(ResultMatrix, dataGridViewResultMatrix);
+			this->Cursor = System::Windows::Forms::Cursors::Default;
+		}
+
+		// copy ResultMatrix to MatrixA
+		private: System::Void CopyResultMatrixToMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
+			if (!ResultMatrix.GetRows() || !ResultMatrix.GetColumns()) {
+				MessageBox::Show("Nothing to copy.", "Error!");
+				return;
+			}
+			RowsMatrixA->Value = Convert::ToInt32(RowsResultMatrix->Text);
+			ColumnsMatrixA->Value = Convert::ToInt32(ColumnsResultMatrix->Text);
+			MatrixA = ResultMatrix;
 			printMatrix(MatrixA, dataGridViewMatrixA);
 		}
-		else if (comboBoxText == "Randomize") {
-			int rows = Convert::ToInt32(numericRows->Text);
-			int columns = Convert::ToInt32(numericColumns->Text);
 
-			mt = Matrix(rows, columns);
-			randomizeMatrixValues(mt, -1000, 1000);
-			printMatrix(mt, dataGridView);
-		}
-		else if (comboBoxText == "Randomize with sizes") {
-			int rows = rand() % 9 + 1;
-			int columns = rows;
-			if (!isSquare->Checked)
-				columns = rand() % 9 + 1;
-
-			numericRows->Value = rows;
-			numericColumns->Value = columns;
-
-			mt = Matrix(rows, columns);
-			randomizeMatrixValues(mt, -1000, 1000);
-			printMatrix(mt, dataGridView);
-		}
-		else if (comboBoxText == "Zeros") {
-			int rows = Convert::ToInt32(numericRows->Text);
-			int columns = Convert::ToInt32(numericColumns->Text);
-
-			mt = Matrix(rows, columns);
-			printMatrix(mt, dataGridView);
-		}
-	}
-
-	// function to check is matrix square
-	private: bool isSquare(Matrix & mt) {
-		return (mt.GetRows() == mt.GetColumns());
-	}
-
-	// function to check dimensions equality of matrixes 
-	private: bool isSameSizes(Matrix & mt1, Matrix & mt2) {
-		return (mt1.GetRows() == mt2.GetRows() && mt1.GetColumns() == mt2.GetColumns());
-	}
-	
-	// function to check consistency of matrixes
-	private: bool isReadyToMultiply(Matrix & mt1, Matrix & mt2) {
-		return (mt1.GetColumns() == mt2.GetRows());
-	}
-	
-	// function to initialize matrix of random values
-	private: void randomizeMatrixValues(Matrix & mt, double min, double max) {
-		for (unsigned int i = 0; i < mt.GetRows(); i++)
-			for (unsigned int j = 0; j < mt.GetColumns(); j++)
-				mt.SetValue(i, j, randomDouble(min, max));
-		
-	}
-	
-	// function to generate random double number
-	private: double randomDouble(double min, double max) {
-		return round(((double)rand() / (double)RAND_MAX * (max - min) + min) * 1000) / 1000.;
-	}
-
-	// function to change value of matrix at user input
-	private: void editMatrixValue(Matrix & mt, System::Windows::Forms::DataGridView^ dataGridView) {
-		double newValue;
-
-		if (!dataGridView->CurrentCell || !dataGridView->CurrentCell->Value)
-			return;
-
-		if (!Double::TryParse(Convert::ToString(dataGridView->CurrentCell->Value), newValue)) {
-			MessageBox::Show("Matrix's elements must be numbers.", "Error!");
-			dataGridView->CurrentCell->Value = "0";
-		}
-
-		int i = dataGridView->CurrentCell->RowIndex;
-		int j = dataGridView->CurrentCell->ColumnIndex;
-
-		mt.SetValue(i, j, newValue);
-	}
-
-	// function to output matrix to dataGridView
-	private: void printMatrix(Matrix & mt, System::Windows::Forms::DataGridView^ dataGridView) {
-		int Rows = mt.GetRows();
-		int Columns = mt.GetColumns();
-
-		dataGridView->RowCount = Rows;
-		dataGridView->ColumnCount = Columns;
-		dataGridView->TopLeftHeaderCell->Value = "Matrix";
-
-		for (int i = 0; i < Rows; i++) 
-			for (int j = 0; j < Columns; j++) {
-				dataGridView->Rows[i]->Cells[j]->Value = mt(i, j);
-				dataGridView->Columns[j]->HeaderCell->Value = Convert::ToString(j + 1);
-				dataGridView->Rows[i]->HeaderCell->Value = Convert::ToString(i + 1);
+		// copy ResultMatrix to MatrixB
+		private: System::Void CopyResultMatrixToMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
+			if (!ResultMatrix.GetRows() || !ResultMatrix.GetColumns()) {
+				MessageBox::Show("Nothing to copy.", "Error!");
+				return;
 			}
-		dataGridView->AutoResizeRowHeadersWidth(DataGridViewRowHeadersWidthSizeMode::AutoSizeToAllHeaders);
-		dataGridView->AutoResizeColumns();
-
-	}
-
-	// print matrixes when MainForm loads
-	private: System::Void MainForm_Load(System::Object^  sender, System::EventArgs^  e) {
-		printMatrix(MatrixA, dataGridViewMatrixA);
-		printMatrix(MatrixB, dataGridViewMatrixB);
-	}
-
-	// change MatrixA when user changes sizes
-	private: System::Void ColumnsMatrixA_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
-		int rows = Convert::ToInt32(RowsMatrixA->Value);
-		int columns = Convert::ToInt32(ColumnsMatrixA->Value);
-		if (rows == columns)
-			isSquareMatrixA->Checked = true;
-		else
-			isSquareMatrixA->Checked = false;
-	}
-
-	// change MatrixB when user changes sizes
-	private: System::Void ColumnsMatrixB_ValueChanged(System::Object^  sender, System::EventArgs^  e) {
-		int rows = Convert::ToInt32(RowsMatrixB->Value);
-		int columns = Convert::ToInt32(ColumnsMatrixB->Value);
-		if (rows == columns)
-			isSquareMatrixB->Checked = true;
-		else
-			isSquareMatrixB->Checked = false;
-	}
-
-	// change value of MatrixA at user input
-	private: System::Void dataGridViewMatrixA_CellValueChanged(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
-		editMatrixValue(MatrixA, dataGridViewMatrixA);
-	}
-
-	// change value of MatrixB at user input
-	private: System::Void dataGridViewMatrixB_CellValueChanged(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
-		editMatrixValue(MatrixB, dataGridViewMatrixB);
-	}
-
-	// transpose and print MatrixA
-	private: System::Void TansposeMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
-		ResultMatrix = MatrixA.Transpose();
-		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
-		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
-		printMatrix(ResultMatrix, dataGridViewResultMatrix);
-	}
-
-	// transpose and print MatrixB
-	private: System::Void TansposeMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
-		ResultMatrix = MatrixB.Transpose();
-		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
-		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
-		printMatrix(ResultMatrix, dataGridViewResultMatrix);
-	}
-
-	// invert and print MatrixA
-	private: System::Void InverteMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
-		this->Cursor = System::Windows::Forms::Cursors::AppStarting;
-		if (!isSquare(MatrixA)) {
-			this->Cursor = System::Windows::Forms::Cursors::Default;
-			MessageBox::Show("Matrix must be square.", "Error!");
-			return;
+			RowsMatrixB->Value = Convert::ToInt32(RowsResultMatrix->Text);
+			ColumnsMatrixB->Value = Convert::ToInt32(ColumnsResultMatrix->Text);
+			MatrixB = ResultMatrix;
+			printMatrix(MatrixB, dataGridViewMatrixB);
 		}
-		double determinantA = MatrixA.GetDeterminant();
-		if (!determinantA) {
-			this->Cursor = System::Windows::Forms::Cursors::Default;
-			MessageBox::Show("Matrix determinant is zero.", "Error!");
-			return;
-		}
-		ResultMatrix = MatrixA.GetAdjugateMatrix() / determinantA;
-		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
-		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
-		printMatrix(ResultMatrix, dataGridViewResultMatrix);
-		this->Cursor = System::Windows::Forms::Cursors::Default;
-	}
 
-	// invert and print MatrixB
-	private: System::Void InverteMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
-		this->Cursor = System::Windows::Forms::Cursors::AppStarting;
-		if (!isSquare(MatrixB)) {
-			this->Cursor = System::Windows::Forms::Cursors::Default;
-			MessageBox::Show("Matrix must be square.", "Error!");
-			return;
+		// when user select how to generate MatrixA
+		private: System::Void comboBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
+			generateAndPrintMatrix(MatrixA, comboBoxGenerateMatrixA->SelectedItem->ToString(), dataGridViewMatrixA, 
+				RowsMatrixA, ColumnsMatrixA, isSquareMatrixA);
 		}
-		double determinantB = MatrixB.GetDeterminant();
-		if (!determinantB) {
-			this->Cursor = System::Windows::Forms::Cursors::Default;
-			MessageBox::Show("Matrix determinant is zero.", "Error!");
-			return;
-		}
-		ResultMatrix = MatrixB.GetAdjugateMatrix() / determinantB;
-		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
-		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
-		printMatrix(ResultMatrix, dataGridViewResultMatrix);
-		this->Cursor = System::Windows::Forms::Cursors::Default;
-	}
 
-	// addition of matrixes with checking
-	private: System::Void plus_Click(System::Object^  sender, System::EventArgs^  e) {
-		if (!isSameSizes(MatrixA, MatrixB)) {
-			MessageBox::Show("The dimensions of the matrices must be equal.", "Error!");
-			return;
+		// when user press button to regenerate MatrixA
+		private: System::Void GenerateMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
+			generateAndPrintMatrix(MatrixA, comboBoxGenerateMatrixA->Text, dataGridViewMatrixA, RowsMatrixA, ColumnsMatrixA, isSquareMatrixA);
 		}
-		ResultMatrix = MatrixA + MatrixB;
-		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
-		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
-		printMatrix(ResultMatrix, dataGridViewResultMatrix);
-	}
 
-	// subtraction of matrixes with checking
-	private: System::Void minus_Click(System::Object^  sender, System::EventArgs^  e) {
-		if (!isSameSizes(MatrixA, MatrixB)) {
-			MessageBox::Show("The dimensions of the matrices must be equal.", "Error!");
-			return;
+		// when user select how to generate MatrixB
+		private: System::Void comboBoxGenerateMatrixB_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
+				generateAndPrintMatrix(MatrixB, comboBoxGenerateMatrixB->SelectedItem->ToString(), dataGridViewMatrixB, 
+					RowsMatrixB, ColumnsMatrixB, isSquareMatrixB);
 		}
-		ResultMatrix = MatrixA - MatrixB;
-		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
-		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
-		printMatrix(ResultMatrix, dataGridViewResultMatrix);
-	}
 
-	// multiplication of matrixes with checking
-	private: System::Void multiply_Click(System::Object^  sender, System::EventArgs^  e) {
-		this->Cursor = System::Windows::Forms::Cursors::AppStarting;
-		if (MatrixB.GetRows() == 1 && MatrixB.GetColumns() == 1 && (MatrixA.GetColumns() > 1 || MatrixA.GetRows() > 1)) {
-			ResultMatrix = MatrixA * MatrixB(0, 0);
-			MessageBox::Show("Matrix B is number.", "Attention!");
+		// when user press button to regenerate MatrixA
+		private: System::Void GenerateMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
+			generateAndPrintMatrix(MatrixB, comboBoxGenerateMatrixB->Text, dataGridViewMatrixB, RowsMatrixB, ColumnsMatrixB, isSquareMatrixB);
 		}
-		else if (MatrixA.GetRows() == 1 && MatrixA.GetColumns() == 1 && (MatrixB.GetColumns() > 1 || MatrixB.GetRows() > 1)) {
-			ResultMatrix = MatrixB * MatrixA(0, 0);
-			MessageBox::Show("Matrix A is number.", "Attention!");
-		}
-		else if (!isReadyToMultiply(MatrixA, MatrixB)) {
-			this->Cursor = System::Windows::Forms::Cursors::Default;
-			MessageBox::Show("The matrixes should be consistent.", "Error!");
-			return;
-		}
-		else
-			ResultMatrix = MatrixA * MatrixB;
-		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
-		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
-		printMatrix(ResultMatrix, dataGridViewResultMatrix);
-		this->Cursor = System::Windows::Forms::Cursors::Default;
-	}
-
-	// division of matrixes with checking
-	private: System::Void divide_Click(System::Object^  sender, System::EventArgs^  e) {
-		this->Cursor = System::Windows::Forms::Cursors::AppStarting;
-		if (!isSquare(MatrixB)) {
-			this->Cursor = System::Windows::Forms::Cursors::Default;
-			MessageBox::Show("Matrix must be square.", "Error!");
-			return;
-		}
-		double determinantB = MatrixB.GetDeterminant();
-		if (!determinantB) {
-			this->Cursor = System::Windows::Forms::Cursors::Default;
-			MessageBox::Show("Matrix determinant is zero.", "Error!");
-			return;
-		}
-		auto newMatrix = new Matrix();
-		*newMatrix = MatrixB.GetAdjugateMatrix() / determinantB;
-		if (MatrixB.GetRows() == 1 && MatrixB.GetColumns() == 1 && (MatrixA.GetColumns() > 1 || MatrixA.GetRows() > 1)) {
-			ResultMatrix = MatrixA * (*newMatrix)(0, 0);
-			MessageBox::Show("Matrix B is number.", "Attention!");
-		}
-		else if (!isReadyToMultiply(MatrixA, MatrixB)) {
-			this->Cursor = System::Windows::Forms::Cursors::Default;
-			MessageBox::Show("The matrixes should be consistent.", "Error!");
-			return;
-		}
-		else 
-			ResultMatrix = MatrixA * *newMatrix;
-		RowsResultMatrix->Text = Convert::ToString(ResultMatrix.GetRows());
-		ColumnsResultMatrix->Text = Convert::ToString(ResultMatrix.GetColumns());
-		printMatrix(ResultMatrix, dataGridViewResultMatrix);
-		this->Cursor = System::Windows::Forms::Cursors::Default;
-	}
-
-	// copy ResultMatrix to MatrixA
-	private: System::Void CopyResultMatrixToMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
-		if (!ResultMatrix.GetRows() || !ResultMatrix.GetColumns()) {
-			MessageBox::Show("Nothing to copy.", "Error!");
-			return;
-		}
-		RowsMatrixA->Value = Convert::ToInt32(RowsResultMatrix->Text);
-		ColumnsMatrixA->Value = Convert::ToInt32(ColumnsResultMatrix->Text);
-		MatrixA = ResultMatrix;
-		printMatrix(MatrixA, dataGridViewMatrixA);
-	}
-
-	// copy ResultMatrix to MatrixB
-	private: System::Void CopyResultMatrixToMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
-		if (!ResultMatrix.GetRows() || !ResultMatrix.GetColumns()) {
-			MessageBox::Show("Nothing to copy.", "Error!");
-			return;
-		}
-		RowsMatrixB->Value = Convert::ToInt32(RowsResultMatrix->Text);
-		ColumnsMatrixB->Value = Convert::ToInt32(ColumnsResultMatrix->Text);
-		MatrixB = ResultMatrix;
-		printMatrix(MatrixB, dataGridViewMatrixB);
-	}
-
-	// when user select how to generate MatrixA
-	private: System::Void comboBox1_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
-		generateAndPrintMatrix(MatrixA, comboBoxGenerateMatrixA->SelectedItem->ToString(), dataGridViewMatrixA, 
-			RowsMatrixA, ColumnsMatrixA, isSquareMatrixA);
-	}
-
-	// when user press button to regenerate MatrixA
-	private: System::Void GenerateMatrixA_Click(System::Object^  sender, System::EventArgs^  e) {
-		generateAndPrintMatrix(MatrixA, comboBoxGenerateMatrixA->Text, dataGridViewMatrixA, RowsMatrixA, ColumnsMatrixA, isSquareMatrixA);
-	}
-
-	// when user select how to generate MatrixB
-	private: System::Void comboBoxGenerateMatrixB_SelectedIndexChanged(System::Object^  sender, System::EventArgs^  e) {
-			generateAndPrintMatrix(MatrixB, comboBoxGenerateMatrixB->SelectedItem->ToString(), dataGridViewMatrixB, 
-				RowsMatrixB, ColumnsMatrixB, isSquareMatrixB);
-	}
-
-	// when user press button to regenerate MatrixA
-	private: System::Void GenerateMatrixB_Click(System::Object^  sender, System::EventArgs^  e) {
-		generateAndPrintMatrix(MatrixB, comboBoxGenerateMatrixB->Text, dataGridViewMatrixB, RowsMatrixB, ColumnsMatrixB, isSquareMatrixB);
-	}
-};
+	};
 }
