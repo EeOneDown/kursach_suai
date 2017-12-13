@@ -1,7 +1,7 @@
 #pragma once
 #include "Matrix.h"
 
-namespace Matrixcalculator {
+namespace MatrixCalculator {
 
 	Matrix MatrixA;
 	Matrix MatrixB;

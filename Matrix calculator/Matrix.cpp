@@ -121,11 +121,11 @@ double Matrix::GetDeterminant() const {
 	else if (rows == 2 && columns == 2)
 		return matrix[0] * matrix[3] - matrix[2] * matrix[1];
 	else {
-		int pusOrMinusOne = 1;
+		int plusOrMinusOne = 1;
 		double determinant = 0;
 		for (unsigned int i = 0; i < columns; i++) {
-			determinant += pusOrMinusOne * matrix[i] * this->GetMinor(0, i).GetDeterminant();
-			pusOrMinusOne *= -1;
+			determinant += plusOrMinusOne * matrix[i] * this->GetMinor(0, i).GetDeterminant();
+			plusOrMinusOne *= -1;
 		}
 		return determinant;
 	}
@@ -181,7 +181,8 @@ Matrix & Matrix::GetAdjugateMatrix() const {
 		
 		for (unsigned int i = 0; i < rows; i++) {
 			for (unsigned int j = 0; j < columns; j++) {
-				newMatrix->matrix[i * newMatrix->columns + j] = pusOrMinusOne * this->GetMinor(i, j).GetDeterminant();
+				newMatrix->matrix[i * newMatrix->columns + j] = 
+					pusOrMinusOne * this->GetMinor(i, j).GetDeterminant();
 				pusOrMinusOne *= -1;
 			}
 			if (!(columns % 2))
@@ -297,10 +298,10 @@ bool operator==(const Matrix & mt1, const Matrix & mt2) {
 }
 
 std::ostream & operator<<(std::ostream & os, const Matrix & mt) {
-	os << "Sizes: " << mt.rows << "x" << mt.columns << std::endl;
+	os << "Sizes: " << mt.rows << "x" << mt.columns << "\n";
 	for (unsigned int i = 0; i < mt.rows; i++) {
 		for (unsigned int j = 0; j < mt.columns; j++)
-			std::cout << mt.matrix[i * mt.columns + j] << "\t";
+			os << mt.matrix[i * mt.columns + j] << "\t";
 		os << std::endl;
 	}
 	return os;

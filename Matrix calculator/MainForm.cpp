@@ -7,6 +7,6 @@ using namespace System::Windows::Forms;
 void Main(array<String^>^ args) {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
-	Matrixcalculator::MainForm form;
+	MatrixCalculator::MainForm form;
 	Application::Run(%form);
 }
